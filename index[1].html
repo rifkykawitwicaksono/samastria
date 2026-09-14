@@ -1,0 +1,2214 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Katalog Produk - Toko Pertanian & Kesehatan</title>
+  <style>
+    /* ============================================
+       RESET & VARIABEL DASAR
+       ============================================ */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #1a7a4c;       /* Hijau pertanian */
+      --primary-dark: #145c39;
+      --primary-light: #e8f5ee;
+      --secondary: #2b6cb0;     /* Biru aksen */
+      --accent: #f6ad55;        /* Oranye lembut */
+      --text: #1a202c;
+      --text-light: #718096;
+      --bg: #f7fafc;
+      --white: #ffffff;
+      --border: #e2e8f0;
+      --danger: #e53e3e;
+      --success: #38a169;
+      --shadow: 0 4px 12px rgba(0,0,0,0.08);
+      --shadow-hover: 0 8px 24px rgba(0,0,0,0.12);
+      --radius: 12px;
+      --transition: all 0.25s ease;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ============================================
+       UTILITAS UMUM
+       ============================================ */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: var(--secondary);
+      color: white;
+    }
+    .btn-secondary:hover {
+      background: #2c5282;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+    }
+    .btn-outline:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-danger {
+      background: var(--danger);
+      color: white;
+    }
+
+    .btn-sm {
+      padding: 6px 12px;
+      font-size: 0.85rem;
+    }
+
+    .btn-block {
+      width: 100%;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* ============================================
+       HEADER & NAVIGASI
+       ============================================ */
+    .header {
+      background: var(--white);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      gap: 16px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--primary);
+      color: white;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      list-style: none;
+    }
+
+    .nav-menu a, .nav-menu button {
+      padding: 8px 14px;
+      border-radius: 8px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: var(--transition);
+    }
+
+    .nav-menu a:hover, .nav-menu button:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .cart-btn {
+      position: relative;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      background: var(--danger);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 700;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text);
+    }
+
+    /* ============================================
+       HALAMAN LOGIN / DAFTAR
+       ============================================ */
+    .auth-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--primary-light) 0%, #c6f6d5 100%);
+      padding: 20px;
+    }
+
+    .auth-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-hover);
+      padding: 40px 32px;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .auth-card h1 {
+      text-align: center;
+      color: var(--primary);
+      margin-bottom: 8px;
+      font-size: 1.6rem;
+    }
+
+    .auth-card p {
+      text-align: center;
+      color: var(--text-light);
+      margin-bottom: 28px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: var(--transition);
+      font-family: inherit;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(26, 122, 76, 0.15);
+    }
+
+    .auth-switch {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.95rem;
+    }
+
+    .auth-switch a {
+      color: var(--primary);
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .auth-error {
+      background: #fed7d7;
+      color: var(--danger);
+      padding: 10px 14px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    /* ============================================
+       BANNER / HERO
+       ============================================ */
+    .hero {
+      background: linear-gradient(135deg, var(--primary) 0%, #2f855a 50%, var(--secondary) 100%);
+      color: white;
+      padding: 60px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 400px;
+      height: 400px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto 24px;
+      position: relative;
+    }
+
+    /* ============================================
+       KATEGORI
+       ============================================ */
+    .section {
+      padding: 40px 0;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      margin-bottom: 24px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: var(--border);
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 16px;
+    }
+
+    .category-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 20px 12px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      border: 2px solid transparent;
+    }
+
+    .category-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--primary);
+    }
+
+    .category-card.active {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .category-icon {
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+
+    .category-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+
+    .category-count {
+      font-size: 0.8rem;
+      color: var(--text-light);
+    }
+
+    /* ============================================
+       FILTER & PENCARIAN
+       ============================================ */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+      align-items: center;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 200px;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 12px 16px 12px 42px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    .search-box::before {
+      content: '🔍';
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1rem;
+    }
+
+    .filter-select {
+      padding: 12px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      background: white;
+      cursor: pointer;
+      min-width: 160px;
+    }
+
+    /* ============================================
+       KARTU PRODUK
+       ============================================ */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .product-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .product-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      background: #edf2f7;
+    }
+
+    .product-body {
+      padding: 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-category {
+      font-size: 0.75rem;
+      color: var(--primary);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .product-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .product-desc {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      margin-bottom: 12px;
+      flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .product-price {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .product-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--text-light);
+      margin-bottom: 12px;
+    }
+
+    .stock-badge {
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .stock-ready {
+      background: #c6f6d5;
+      color: var(--success);
+    }
+
+    .stock-low {
+      background: #feebc8;
+      color: #c05621;
+    }
+
+    .stock-out {
+      background: #fed7d7;
+      color: var(--danger);
+    }
+
+    .product-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .product-actions .btn {
+      flex: 1;
+      padding: 10px;
+      font-size: 0.85rem;
+    }
+
+    /* ============================================
+       DETAIL PRODUK
+       ============================================ */
+    .product-detail {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: var(--shadow);
+    }
+
+    .detail-img {
+      width: 100%;
+      border-radius: var(--radius);
+      object-fit: cover;
+      max-height: 400px;
+      background: #edf2f7;
+    }
+
+    .detail-info h1 {
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+    }
+
+    .detail-price {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 12px 0;
+    }
+
+    .detail-section {
+      margin: 20px 0;
+    }
+
+    .detail-section h3 {
+      font-size: 1rem;
+      margin-bottom: 6px;
+      color: var(--primary);
+    }
+
+    .qty-control {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .qty-control button {
+      width: 36px;
+      height: 36px;
+      border: 1.5px solid var(--border);
+      background: white;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .qty-control button:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    .qty-control span {
+      font-size: 1.2rem;
+      font-weight: 600;
+      min-width: 30px;
+      text-align: center;
+    }
+
+    /* ============================================
+       KERANJANG
+       ============================================ */
+    .cart-table {
+      width: 100%;
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 80px 1fr auto auto auto;
+      gap: 16px;
+      align-items: center;
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .cart-item img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .cart-item-name {
+      font-weight: 600;
+    }
+
+    .cart-item-price {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .cart-summary {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin-top: 24px;
+    }
+
+    .cart-summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      font-size: 1rem;
+    }
+
+    .cart-summary-row.total {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary);
+      border-top: 2px solid var(--border);
+      padding-top: 12px;
+      margin-top: 12px;
+    }
+
+    /* ============================================
+       CHECKOUT & PEMBAYARAN
+       ============================================ */
+    .checkout-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .checkout-form,
+    .order-summary {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .order-summary h3 {
+      margin-bottom: 16px;
+      color: var(--primary);
+    }
+
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px dashed var(--border);
+      font-size: 0.9rem;
+    }
+
+    .payment-info {
+      background: var(--primary-light);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .payment-info .bank-name {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .payment-info .account-number {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin: 12px 0;
+      background: white;
+      padding: 12px;
+      border-radius: 8px;
+      display: inline-block;
+    }
+
+    /* ============================================
+       RIWAYAT PESANAN
+       ============================================ */
+    .order-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+      margin-bottom: 16px;
+    }
+
+    .order-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .order-status {
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .status-menunggu { background: #feebc8; color: #c05621; }
+    .status-dikonfirmasi { background: #bee3f8; color: #2b6cb0; }
+    .status-diproses { background: #c6f6d5; color: #276749; }
+    .status-selesai { background: #e2e8f0; color: #4a5568; }
+
+    /* ============================================
+       NOTIFIKASI TOAST
+       ============================================ */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--text);
+      color: white;
+      padding: 14px 24px;
+      border-radius: 10px;
+      box-shadow: var(--shadow-hover);
+      z-index: 9999;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: var(--transition);
+      max-width: 320px;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .toast.success { background: var(--success); }
+    .toast.error { background: var(--danger); }
+
+    /* ============================================
+       BACK TO TOP
+       ============================================ */
+    .back-to-top {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      width: 48px;
+      height: 48px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 1.3rem;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      z-index: 999;
+    }
+
+    .back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      background: var(--primary-dark);
+      transform: scale(1.1);
+    }
+
+    /* ============================================
+       EMPTY STATE
+       ============================================ */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-light);
+    }
+
+    .empty-state .icon {
+      font-size: 4rem;
+      margin-bottom: 16px;
+    }
+
+    /* ============================================
+       FOOTER
+       ============================================ */
+    .footer {
+      background: var(--text);
+      color: #a0aec0;
+      padding: 40px 0 20px;
+      margin-top: 60px;
+    }
+
+    .footer-inner {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px;
+      margin-bottom: 24px;
+    }
+
+    .footer h4 {
+      color: white;
+      margin-bottom: 12px;
+    }
+
+    .footer a {
+      color: #a0aec0;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.9rem;
+    }
+
+    .footer a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid #2d3748;
+      font-size: 0.85rem;
+    }
+
+    /* ============================================
+       RESPONSIVE
+       ============================================ */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        padding: 16px;
+        box-shadow: var(--shadow);
+      }
+
+      .nav-menu.open {
+        display: flex;
+      }
+
+      .hero h1 {
+        font-size: 1.6rem;
+      }
+
+      .product-detail {
+        grid-template-columns: 1fr;
+      }
+
+      .checkout-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cart-item {
+        grid-template-columns: 60px 1fr;
+        gap: 12px;
+      }
+
+      .cart-item .qty-control,
+      .cart-item .cart-item-price,
+      .cart-item .btn-danger {
+        grid-column: 2;
+      }
+
+      .category-grid {
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      }
+
+      .filter-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================
+       HALAMAN LOGIN / DAFTAR
+       ============================================ -->
+  <div id="authPage" class="auth-page">
+    <div class="auth-card">
+      <div class="logo" style="justify-content:center;margin-bottom:20px;">
+        <div class="logo-icon">🌿</div>
+        <span>TokoSehat</span>
+      </div>
+      <h1 id="authTitle">Masuk</h1>
+      <p id="authSubtitle">Masuk ke akun Anda untuk berbelanja</p>
+
+      <div class="auth-error" id="authError"></div>
+
+      <!-- Form Login -->
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="loginEmail">Email atau Username</label>
+          <input type="text" id="loginEmail" placeholder="contoh@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" placeholder="Masukkan password" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Masuk</button>
+      </form>
+
+      <!-- Form Daftar (tersembunyi default) -->
+      <form id="registerForm" class="hidden">
+        <div class="form-group">
+          <label for="regName">Nama Lengkap</label>
+          <input type="text" id="regName" placeholder="Nama Anda" required>
+        </div>
+        <div class="form-group">
+          <label for="regEmail">Email</label>
+          <input type="email" id="regEmail" placeholder="contoh@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="regUsername">Username</label>
+          <input type="text" id="regUsername" placeholder="username" required>
+        </div>
+        <div class="form-group">
+          <label for="regPassword">Password</label>
+          <input type="password" id="regPassword" placeholder="Minimal 6 karakter" required minlength="6">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Daftar Akun</button>
+      </form>
+
+      <div class="auth-switch">
+        <span id="authSwitchText">Belum punya akun?</span>
+        <a id="authSwitchBtn">Daftar sekarang</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================
+       APLIKASI UTAMA (setelah login)
+       ============================================ -->
+  <div id="app" class="hidden">
+
+    <!-- HEADER -->
+    <header class="header">
+      <div class="container header-inner">
+        <a href="#" class="logo" onclick="showPage('home'); return false;">
+          <div class="logo-icon">🌿</div>
+          <span>TokoSehat</span>
+        </a>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+
+        <nav>
+          <ul class="nav-menu" id="navMenu">
+            <li><a href="#" onclick="showPage('home'); return false;">Beranda</a></li>
+            <li><a href="#" onclick="showPage('katalog'); return false;">Katalog</a></li>
+            <li><a href="#" onclick="showPage('orders'); return false;">Pesanan</a></li>
+            <li>
+              <button class="cart-btn" onclick="showPage('cart')">
+                🛒 Keranjang
+                <span class="cart-count hidden" id="cartCount">0</span>
+              </button>
+            </li>
+            <li><button onclick="logout()">Keluar</button></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- HALAMAN BERANDA -->
+    <div id="page-home">
+      <section class="hero">
+        <div class="container">
+          <h1>Katalog Produk Pertanian & Kesehatan</h1>
+          <p>Temukan produk berkualitas untuk kebutuhan pertanian, kesehatan, kosmetik, dan berbagai kebutuhan rumah tangga Anda.</p>
+          <button class="btn btn-primary" style="background:white;color:var(--primary);" onclick="showPage('katalog')">
+            Lihat Semua Produk
+          </button>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <h2 class="section-title">Kategori Produk</h2>
+          <div class="category-grid" id="homeCategories"></div>
+        </div>
+      </section>
+
+      <section class="section" style="padding-top:0;">
+        <div class="container">
+          <h2 class="section-title">🔥 Produk Terlaris</h2>
+          <div class="product-grid" id="bestSellerGrid"></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- HALAMAN KATALOG -->
+    <div id="page-katalog" class="hidden">
+      <section class="section">
+        <div class="container">
+          <h2 class="section-title">Katalog Produk</h2>
+
+          <div class="filter-bar">
+            <div class="search-box">
+              <input type="text" id="searchInput" placeholder="Cari produk..." oninput="filterProducts()">
+            </div>
+            <select class="filter-select" id="categoryFilter" onchange="filterProducts()">
+              <option value="">Semua Kategori</option>
+            </select>
+            <select class="filter-select" id="sortFilter" onchange="filterProducts()">
+              <option value="terlaris">Produk Terlaris</option>
+              <option value="harga-asc">Harga Termurah</option>
+              <option value="harga-desc">Harga Tertinggi</option>
+              <option value="nama">Nama Produk (A-Z)</option>
+            </select>
+          </div>
+
+          <div class="product-grid" id="productGrid"></div>
+          <div class="empty-state hidden" id="noProductMsg">
+            <div class="icon">🔍</div>
+            <h3>Produk tidak ditemukan</h3>
+            <p>Coba kata kunci atau filter yang berbeda.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- HALAMAN DETAIL PRODUK -->
+    <div id="page-detail" class="hidden">
+      <section class="section">
+        <div class="container">
+          <button class="btn btn-outline btn-sm" onclick="showPage('katalog')" style="margin-bottom:20px;">← Kembali ke Katalog</button>
+          <div class="product-detail" id="productDetailContent"></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- HALAMAN KERANJANG -->
+    <div id="page-cart" class="hidden">
+      <section class="section">
+        <div class="container">
+          <h2 class="section-title">Keranjang Belanja</h2>
+          <div id="cartContent"></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- HALAMAN CHECKOUT -->
+    <div id="page-checkout" class="hidden">
+      <section class="section">
+        <div class="container">
+          <h2 class="section-title">Checkout</h2>
+          <div class="checkout-grid">
+            <div class="checkout-form">
+              <h3 style="margin-bottom:20px;">Data Pengiriman</h3>
+              <form id="checkoutForm">
+                <div class="form-group">
+                  <label for="checkoutName">Nama Lengkap *</label>
+                  <input type="text" id="checkoutName" required>
+                </div>
+                <div class="form-group">
+                  <label for="checkoutWhatsapp">Nomor WhatsApp *</label>
+                  <input type="tel" id="checkoutWhatsapp" placeholder="08xxxxxxxxxx" required>
+                </div>
+                <div class="form-group">
+                  <label for="checkoutAddress">Alamat Lengkap *</label>
+                  <textarea id="checkoutAddress" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="checkoutRegion">Wilayah Tujuan *</label>
+                  <select id="checkoutRegion" required onchange="updateShippingCost()">
+                    <option value="">-- Pilih Wilayah --</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="checkoutNote">Catatan Pesanan</label>
+                  <textarea id="checkoutNote" rows="2" placeholder="Opsional"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Lanjutkan ke Pembayaran</button>
+              </form>
+            </div>
+            <div class="order-summary" id="checkoutSummary">
+              <!-- Diisi oleh JS -->
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- HALAMAN PEMBAYARAN -->
+    <div id="page-payment" class="hidden">
+      <section class="section">
+        <div class="container" style="max-width:600px;">
+          <h2 class="section-title">Pembayaran Transfer Bank</h2>
+          <div class="payment-info" id="paymentInfo">
+            <!-- Diisi oleh JS -->
+          </div>
+          <div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;">
+            <button class="btn btn-primary" onclick="copyAccountNumber()">📋 Salin Nomor Rekening</button>
+            <button class="btn btn-secondary" onclick="confirmPayment()">✅ Konfirmasi Pembayaran</button>
+            <button class="btn btn-outline" onclick="showPage('home')">🛒 Kembali Berbelanja</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- HALAMAN RIWAYAT PESANAN -->
+    <div id="page-orders" class="hidden">
+      <section class="section">
+        <div class="container">
+          <h2 class="section-title">Riwayat Pesanan</h2>
+          <div id="ordersContent"></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-inner">
+          <div>
+            <h4>🌿 TokoSehat</h4>
+            <p style="font-size:0.9rem;">Katalog produk pertanian, kesehatan, dan kebutuhan rumah tangga berkualitas.</p>
+          </div>
+          <div>
+            <h4>Menu</h4>
+            <a href="#" onclick="showPage('home');return false;">Beranda</a>
+            <a href="#" onclick="showPage('katalog');return false;">Katalog</a>
+            <a href="#" onclick="showPage('orders');return false;">Pesanan Saya</a>
+          </div>
+          <div>
+            <h4>Kontak</h4>
+            <a href="#">WhatsApp: 08xx-xxxx-xxxx</a>
+            <a href="#">Email: info@tokosehat.id</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          &copy; 2025 TokoSehat. Dibuat dengan ❤️ untuk kemudahan belanja.
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- TOAST NOTIFIKASI -->
+  <div class="toast" id="toast"></div>
+
+  <!-- TOMBOL KEMBALI KE ATAS -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+  <script>
+    /* ============================================================
+       KONFIGURASI YANG MUDAH DIEDIT
+       ============================================================ */
+
+    // --- Informasi Rekening Bank (GANTI sesuai kebutuhan) ---
+    const BANK_INFO = {
+      bankName: "Bank BCA",
+      accountName: "Toko Sehat Indonesia",
+      accountNumber: "1234567890"   // <-- Ganti nomor rekening di sini
+    };
+
+    // --- Data Wilayah & Tarif Pengiriman ---
+    // CATATAN: Data di bawah ini adalah CONTOH/PLACEHOLDER.
+    // Ganti dengan data resmi dari buku tarif wilayah Anda.
+    // Rumus: Biaya Pengiriman = Tarif Dasar + (Jarak Tempuh × Tarif per Kilometer)
+    const WILAYAH_DATA = [
+      { nama: "Kota Pusat", jarakKm: 5, tarifDasar: 10000, tarifPerKm: 1500, biayaTambahan: 0 },
+      { nama: "Kabupaten Utara", jarakKm: 15, tarifDasar: 15000, tarifPerKm: 2000, biayaTambahan: 0 },
+      { nama: "Kabupaten Selatan", jarakKm: 25, tarifDasar: 15000, tarifPerKm: 2000, biayaTambahan: 5000 },
+      { nama: "Kabupaten Timur", jarakKm: 40, tarifDasar: 20000, tarifPerKm: 2500, biayaTambahan: 0 },
+      { nama: "Kabupaten Barat", jarakKm: 35, tarifDasar: 20000, tarifPerKm: 2500, biayaTambahan: 3000 },
+      { nama: "Luar Provinsi", jarakKm: 80, tarifDasar: 30000, tarifPerKm: 3000, biayaTambahan: 10000 }
+      // Tambahkan wilayah baru di sini dengan format yang sama
+    ];
+
+    // --- Kategori Produk (urutan sesuai permintaan) ---
+    const KATEGORI_LIST = [
+      { id: "kosmetik", nama: "KOSMETIK", icon: "💄" },
+      { id: "kesehatan", nama: "KESEHATAN", icon: "💊" },
+      { id: "pertanian", nama: "PERTANIAN", icon: "🌾" },
+      { id: "homecare", nama: "HOME CARE", icon: "🏠" },
+      { id: "perikanan", nama: "PERIKANAN", icon: "🐟" },
+      { id: "teknologi", nama: "INOVASI TEKNOLOGI", icon: "💡" },
+      { id: "peternakan", nama: "PETERNAKAN", icon: "🐄" },
+      { id: "lainlain", nama: "LAIN-LAIN", icon: "📦" }
+    ];
+
+    /* ============================================================
+       DATA PRODUK
+       ============================================================
+       Cara menambah produk baru:
+       1. Salin salah satu objek di bawah
+       2. Ubah id (harus unik), nama, kategori, harga, dll.
+       3. Untuk gambar, gunakan URL gambar online atau path lokal
+       ============================================================ */
+    const PRODUCTS = [
+      // === KOSMETIK ===
+      {
+        id: 1,
+        nama: "Sabun Herbal Aloe Vera",
+        kategori: "kosmetik",
+        harga: 25000,
+        deskripsi: "Sabun alami berbahan aloe vera untuk kulit lembut dan sehat.",
+        deskripsiLengkap: "Sabun herbal dengan ekstrak aloe vera murni. Membersihkan tanpa membuat kulit kering. Cocok untuk semua jenis kulit.",
+        manfaat: "Melembabkan kulit, mengurangi iritasi, menjaga kelembapan alami.",
+        caraPakai: "Basahi wajah/tubuh, oleskan sabun, busakan, lalu bilas.",
+        gambar: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=400&h=300&fit=crop",
+        stok: 50,
+        jumlahTerjual: 120,
+        status: "tersedia"
+      },
+      {
+        id: 2,
+        nama: "Serum Vitamin C",
+        kategori: "kosmetik",
+        harga: 89000,
+        deskripsi: "Serum pencerah wajah dengan vitamin C stabil.",
+        deskripsiLengkap: "Serum wajah konsentrasi tinggi yang membantu mencerahkan dan meratakan warna kulit.",
+        manfaat: "Mencerahkan, antioksidan, mengurangi noda hitam.",
+        caraPakai: "Teteskan 3-4 tetes ke wajah setelah cleanser, pagi dan malam.",
+        gambar: "https://images.unsplash.com/photo-1620916560066-54f7680294bb?w=400&h=300&fit=crop",
+        stok: 30,
+        jumlahTerjual: 95,
+        status: "tersedia"
+      },
+      // === KESEHATAN ===
+      {
+        id: 3,
+        nama: "Madu Hutan Murni 500g",
+        kategori: "kesehatan",
+        harga: 75000,
+        deskripsi: "Madu hutan alami tanpa campuran gula.",
+        deskripsiLengkap: "Madu hasil panen dari hutan tropis, murni 100% tanpa pengawet.",
+        manfaat: "Meningkatkan daya tahan tubuh, sumber energi alami, baik untuk tenggorokan.",
+        caraPakai: "1-2 sendok makan per hari, bisa dicampur air hangat.",
+        gambar: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400&h=300&fit=crop",
+        stok: 40,
+        jumlahTerjual: 200,
+        status: "tersedia"
+      },
+      {
+        id: 4,
+        nama: "Kapsul Kunyit Putih",
+        kategori: "kesehatan",
+        harga: 55000,
+        deskripsi: "Suplemen herbal kunyit putih untuk kesehatan tubuh.",
+        deskripsiLengkap: "Kapsul ekstrak kunyit putih yang membantu menjaga kesehatan pencernaan dan imunitas.",
+        manfaat: "Antioksidan, mendukung pencernaan, menjaga stamina.",
+        caraPakai: "2 kapsul sehari setelah makan.",
+        gambar: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&h=300&fit=crop",
+        stok: 60,
+        jumlahTerjual: 150,
+        status: "tersedia"
+      },
+      // === PERTANIAN ===
+      {
+        id: 5,
+        nama: "Pupuk Organik Cair 1L",
+        kategori: "pertanian",
+        harga: 45000,
+        deskripsi: "Pupuk organik cair ramah lingkungan untuk tanaman.",
+        deskripsiLengkap: "Pupuk cair berbasis bahan organik yang menyuburkan tanah dan meningkatkan hasil panen.",
+        manfaat: "Menyuburkan tanah, meningkatkan pertumbuhan tanaman, ramah lingkungan.",
+        caraPakai: "Campurkan 10ml per liter air, semprotkan ke daun atau siram ke tanah.",
+        gambar: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=300&fit=crop",
+        stok: 80,
+        jumlahTerjual: 180,
+        status: "tersedia"
+      },
+      {
+        id: 6,
+        nama: "Benih Cabai Hibrida",
+        kategori: "pertanian",
+        harga: 15000,
+        deskripsi: "Benih cabai unggul tahan hama, hasil tinggi.",
+        deskripsiLengkap: "Benih cabai hibrida F1 dengan daya tumbuh tinggi dan tahan terhadap penyakit umum.",
+        manfaat: "Hasil panen melimpah, tahan hama, cocok dataran rendah-sedang.",
+        caraPakai: "Semai di media tanam, pindah tanam setelah 3-4 minggu.",
+        gambar: "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=400&h=300&fit=crop",
+        stok: 100,
+        jumlahTerjual: 90,
+        status: "tersedia"
+      },
+      // === HOME CARE ===
+      {
+        id: 7,
+        nama: "Pembersih Lantai Herbal",
+        kategori: "homecare",
+        harga: 32000,
+        deskripsi: "Pembersih lantai alami aroma segar.",
+        deskripsiLengkap: "Cairan pembersih lantai berbahan herbal, efektif membersihkan tanpa bahan kimia berbahaya.",
+        manfaat: "Membersihkan noda, memberi aroma segar, aman untuk anak & hewan.",
+        caraPakai: "Campur 1 tutup botol ke 5 liter air, lap lantai.",
+        gambar: "https://images.unsplash.com/photo-1563453392212-326f5e854473?w=400&h=300&fit=crop",
+        stok: 45,
+        jumlahTerjual: 70,
+        status: "tersedia"
+      },
+      {
+        id: 8,
+        nama: "Sabun Cuci Piring Natural",
+        kategori: "homecare",
+        harga: 18000,
+        deskripsi: "Sabun cuci piring ramah lingkungan.",
+        deskripsiLengkap: "Formula alami yang membersihkan lemak dan kotoran dengan mudah.",
+        manfaat: "Efektif menghilangkan lemak, lembut di tangan, biodegradable.",
+        caraPakai: "Tuang sedikit ke spons basah, cuci piring seperti biasa.",
+        gambar: "https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?w=400&h=300&fit=crop",
+        stok: 70,
+        jumlahTerjual: 110,
+        status: "tersedia"
+      },
+      // === PERIKANAN ===
+      {
+        id: 9,
+        nama: "Pakan Ikan Lele Premium 5kg",
+        kategori: "perikanan",
+        harga: 95000,
+        deskripsi: "Pakan pelet berkualitas tinggi untuk lele.",
+        deskripsiLengkap: "Pakan ikan lele dengan kandungan protein optimal untuk pertumbuhan cepat.",
+        manfaat: "Pertumbuhan cepat, daya cerna tinggi, mengurangi limbah air.",
+        caraPakai: "Berikan 2-3% dari bobot ikan per hari, bagi 2-3 kali pemberian.",
+        gambar: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=300&fit=crop",
+        stok: 35,
+        jumlahTerjual: 85,
+        status: "tersedia"
+      },
+      {
+        id: 10,
+        nama: "Probiotik Kolam Ikan",
+        kategori: "perikanan",
+        harga: 40000,
+        deskripsi: "Probiotik untuk menjaga kualitas air kolam.",
+        deskripsiLengkap: "Campuran probiotik yang menyeimbangkan mikroorganisme di kolam ikan.",
+        manfaat: "Menjaga kualitas air, mengurangi amonia, meningkatkan kesehatan ikan.",
+        caraPakai: "Larutkan sesuai dosis, tebar merata ke kolam seminggu sekali.",
+        gambar: "https://images.unsplash.com/photo-1535591273668-554a5d10dd39?w=400&h=300&fit=crop",
+        stok: 50,
+        jumlahTerjual: 60,
+        status: "tersedia"
+      },
+      // === INOVASI TEKNOLOGI ===
+      {
+        id: 11,
+        nama: "Sensor Kelembaban Tanah IoT",
+        kategori: "teknologi",
+        harga: 175000,
+        deskripsi: "Sensor pintar untuk monitoring kelembaban tanah.",
+        deskripsiLengkap: "Perangkat IoT yang mengukur kelembaban dan suhu tanah, terhubung ke smartphone.",
+        manfaat: "Hemat air, pantau tanaman real-time, cocok pertanian modern.",
+        caraPakai: "Tancapkan sensor ke tanah, hubungkan via aplikasi Bluetooth.",
+        gambar: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=300&fit=crop",
+        stok: 20,
+        jumlahTerjual: 45,
+        status: "tersedia"
+      },
+      {
+        id: 12,
+        nama: "Lampu UV Sterilisasi",
+        kategori: "teknologi",
+        harga: 220000,
+        deskripsi: "Lampu UV untuk sterilisasi ruang & peralatan.",
+        deskripsiLengkap: "Lampu ultraviolet yang membunuh bakteri dan virus secara efektif.",
+        manfaat: "Sterilisasi cepat, tanpa bahan kimia, hemat energi.",
+        caraPakai: "Nyalakan di ruangan tertutup 15-30 menit, hindari paparan langsung.",
+        gambar: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
+        stok: 15,
+        jumlahTerjual: 30,
+        status: "tersedia"
+      },
+      // === PETERNAKAN ===
+      {
+        id: 13,
+        nama: "Pakan Ayam Petelur 10kg",
+        kategori: "peternakan",
+        harga: 120000,
+        deskripsi: "Pakan lengkap untuk ayam petelur produktif.",
+        deskripsiLengkap: "Formula pakan seimbang dengan protein, kalsium, dan vitamin untuk produksi telur optimal.",
+        manfaat: "Meningkatkan produksi telur, kualitas cangkang lebih baik, ayam lebih sehat.",
+        caraPakai: "Berikan sesuai umur ayam, sediakan air minum selalu.",
+        gambar: "https://images.unsplash.com/photo-1548550023-2bdb3ffd6930?w=400&h=300&fit=crop",
+        stok: 40,
+        jumlahTerjual: 75,
+        status: "tersedia"
+      },
+      {
+        id: 14,
+        nama: "Vitamin Ternak Multivitamin",
+        kategori: "peternakan",
+        harga: 35000,
+        deskripsi: "Suplemen vitamin untuk ternak ruminansia & unggas.",
+        deskripsiLengkap: "Multivitamin larut air yang mendukung pertumbuhan dan daya tahan ternak.",
+        manfaat: "Meningkatkan nafsu makan, mencegah defisiensi vitamin, mendukung pertumbuhan.",
+        caraPakai: "Campurkan ke air minum sesuai dosis pada kemasan.",
+        gambar: "https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=400&h=300&fit=crop",
+        stok: 55,
+        jumlahTerjual: 55,
+        status: "tersedia"
+      },
+      // === LAIN-LAIN ===
+      {
+        id: 15,
+        nama: "Tas Belanja Ramah Lingkungan",
+        kategori: "lainlain",
+        harga: 28000,
+        deskripsi: "Tas belanja kain reusable tahan lama.",
+        deskripsiLengkap: "Tas belanja berbahan kain tebal yang dapat dicuci dan digunakan berulang kali.",
+        manfaat: "Mengurangi sampah plastik, kuat menahan beban, praktis dilipat.",
+        caraPakai: "Gunakan untuk belanja, cuci bila kotor.",
+        gambar: "https://images.unsplash.com/photo-1597484661973-ee6cd0b88594?w=400&h=300&fit=crop",
+        stok: 90,
+        jumlahTerjual: 40,
+        status: "tersedia"
+      },
+      {
+        id: 16,
+        nama: "Botol Minum Stainless 500ml",
+        kategori: "lainlain",
+        harga: 65000,
+        deskripsi: "Botol minum stainless steel tahan panas & dingin.",
+        deskripsiLengkap: "Botol minum vacuum insulated yang menjaga suhu minuman hingga 12 jam.",
+        manfaat: "Tahan karat, menjaga suhu, bebas BPA, mudah dibersihkan.",
+        caraPakai: "Isi minuman, tutup rapat. Cuci dengan air sabun setelah digunakan.",
+        gambar: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&h=300&fit=crop",
+        stok: 25,
+        jumlahTerjual: 50,
+        status: "tersedia"
+      }
+    ];
+
+    /* ============================================================
+       STATE APLIKASI (menggunakan localStorage)
+       ============================================================ */
+    let currentUser = null;
+    let cart = [];
+    let currentDetailQty = 1;
+    let currentOrder = null; // pesanan yang sedang dibayar
+
+    /* ============================================================
+       FUNGSI UTILITAS
+       ============================================================ */
+
+    // Format angka ke Rupiah Indonesia
+    function formatRupiah(angka) {
+      return 'Rp ' + angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    }
+
+    // Tampilkan notifikasi toast
+    function showToast(pesan, tipe = 'success') {
+      const toast = document.getElementById('toast');
+      toast.textContent = pesan;
+      toast.className = 'toast show ' + tipe;
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    // Hitung biaya pengiriman berdasarkan wilayah
+    function hitungBiayaPengiriman(wilayahNama) {
+      const wilayah = WILAYAH_DATA.find(w => w.nama === wilayahNama);
+      if (!wilayah) return { biaya: 0, jarak: 0 };
+      const biaya = wilayah.tarifDasar + (wilayah.jarakKm * wilayah.tarifPerKm) + wilayah.biayaTambahan;
+      return { biaya, jarak: wilayah.jarakKm, data: wilayah };
+    }
+
+    /* ============================================================
+       MANAJEMEN USER (localStorage)
+       Struktur siap dikembangkan ke Firebase nanti
+       ============================================================ */
+    function getUsers() {
+      return JSON.parse(localStorage.getItem('tokosehat_users') || '[]');
+    }
+
+    function saveUsers(users) {
+      localStorage.setItem('tokosehat_users', JSON.stringify(users));
+    }
+
+    function getCurrentUser() {
+      return JSON.parse(localStorage.getItem('tokosehat_currentUser') || 'null');
+    }
+
+    function setCurrentUser(user) {
+      localStorage.setItem('tokosehat_currentUser', JSON.stringify(user));
+      currentUser = user;
+    }
+
+    function logout() {
+      localStorage.removeItem('tokosehat_currentUser');
+      currentUser = null;
+      cart = [];
+      saveCart();
+      document.getElementById('app').classList.add('hidden');
+      document.getElementById('authPage').classList.remove('hidden');
+      showToast('Anda telah keluar', 'success');
+    }
+
+    /* ============================================================
+       MANAJEMEN KERANJANG
+       ============================================================ */
+    function getCartKey() {
+      return currentUser ? `tokosehat_cart_${currentUser.email}` : 'tokosehat_cart_guest';
+    }
+
+    function loadCart() {
+      cart = JSON.parse(localStorage.getItem(getCartKey()) || '[]');
+      updateCartBadge();
+    }
+
+    function saveCart() {
+      localStorage.setItem(getCartKey(), JSON.stringify(cart));
+      updateCartBadge();
+    }
+
+    function updateCartBadge() {
+      const count = cart.reduce((sum, item) => sum + item.qty, 0);
+      const badge = document.getElementById('cartCount');
+      if (count > 0) {
+        badge.textContent = count;
+        badge.classList.remove('hidden');
+      } else {
+        badge.classList.add('hidden');
+      }
+    }
+
+    function addToCart(productId, qty = 1) {
+      const product = PRODUCTS.find(p => p.id === productId);
+      if (!product) return;
+      if (product.stok < 1) {
+        showToast('Stok produk habis', 'error');
+        return;
+      }
+
+      const existing = cart.find(item => item.id === productId);
+      if (existing) {
+        if (existing.qty + qty > product.stok) {
+          showToast('Jumlah melebihi stok tersedia', 'error');
+          return;
+        }
+        existing.qty += qty;
+      } else {
+        cart.push({
+          id: product.id,
+          nama: product.nama,
+          harga: product.harga,
+          gambar: product.gambar,
+          qty: qty
+        });
+      }
+      saveCart();
+      showToast(`${product.nama} ditambahkan ke keranjang`);
+    }
+
+    function updateCartQty(productId, delta) {
+      const item = cart.find(i => i.id === productId);
+      if (!item) return;
+      const product = PRODUCTS.find(p => p.id === productId);
+      const newQty = item.qty + delta;
+      if (newQty < 1) {
+        removeFromCart(productId);
+        return;
+      }
+      if (newQty > product.stok) {
+        showToast('Melebihi stok tersedia', 'error');
+        return;
+      }
+      item.qty = newQty;
+      saveCart();
+      renderCart();
+    }
+
+    function removeFromCart(productId) {
+      cart = cart.filter(i => i.id !== productId);
+      saveCart();
+      renderCart();
+      showToast('Produk dihapus dari keranjang');
+    }
+
+    function getCartSubtotal() {
+      return cart.reduce((sum, item) => sum + item.harga * item.qty, 0);
+    }
+
+    /* ============================================================
+       MANAJEMEN PESANAN
+       ============================================================ */
+    function getOrders() {
+      if (!currentUser) return [];
+      return JSON.parse(localStorage.getItem(`tokosehat_orders_${currentUser.email}`) || '[]');
+    }
+
+    function saveOrder(order) {
+      const orders = getOrders();
+      orders.unshift(order); // pesanan terbaru di atas
+      localStorage.setItem(`tokosehat_orders_${currentUser.email}`, JSON.stringify(orders));
+    }
+
+    /* ============================================================
+       RENDER FUNGSI
+       ============================================================ */
+
+    // Render kategori di beranda
+    function renderHomeCategories() {
+      const container = document.getElementById('homeCategories');
+      container.innerHTML = KATEGORI_LIST.map(kat => {
+        const count = PRODUCTS.filter(p => p.kategori === kat.id).length;
+        return `
+          <div class="category-card" onclick="filterByCategory('${kat.id}')">
+            <div class="category-icon">${kat.icon}</div>
+            <div class="category-name">${kat.nama}</div>
+            <div class="category-count">${count} produk</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Render produk terlaris (top 4)
+    function renderBestSellers() {
+      const sorted = [...PRODUCTS].sort((a, b) => b.jumlahTerjual - a.jumlahTerjual).slice(0, 4);
+      document.getElementById('bestSellerGrid').innerHTML = sorted.map(p => productCardHTML(p)).join('');
+    }
+
+    // Template kartu produk
+    function productCardHTML(p) {
+      let stockClass = 'stock-ready';
+      let stockText = 'Tersedia';
+      if (p.stok === 0) { stockClass = 'stock-out'; stockText = 'Habis'; }
+      else if (p.stok <= 10) { stockClass = 'stock-low'; stockText = 'Stok terbatas'; }
+
+      return `
+        <div class="product-card">
+          <img class="product-img" src="${p.gambar}" alt="${p.nama}" loading="lazy"
+               onerror="this.src='https://via.placeholder.com/400x300?text=Produk'">
+          <div class="product-body">
+            <div class="product-category">${getKategoriNama(p.kategori)}</div>
+            <div class="product-name">${p.nama}</div>
+            <div class="product-desc">${p.deskripsi}</div>
+            <div class="product-price">${formatRupiah(p.harga)}</div>
+            <div class="product-meta">
+              <span>Terjual: ${p.jumlahTerjual}</span>
+              <span class="stock-badge ${stockClass}">${stockText}</span>
+            </div>
+            <div class="product-actions">
+              <button class="btn btn-outline btn-sm" onclick="showProductDetail(${p.id})">Detail</button>
+              <button class="btn btn-primary btn-sm" onclick="addToCart(${p.id})" ${p.stok === 0 ? 'disabled' : ''}>
+                + Keranjang
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function getKategoriNama(id) {
+      const kat = KATEGORI_LIST.find(k => k.id === id);
+      return kat ? kat.nama : id;
+    }
+
+    // Filter & sort produk katalog
+    function filterProducts() {
+      const search = document.getElementById('searchInput').value.toLowerCase();
+      const kategori = document.getElementById('categoryFilter').value;
+      const sort = document.getElementById('sortFilter').value;
+
+      let filtered = PRODUCTS.filter(p => {
+        const matchSearch = p.nama.toLowerCase().includes(search) ||
+                            p.deskripsi.toLowerCase().includes(search);
+        const matchKat = !kategori || p.kategori === kategori;
+        return matchSearch && matchKat;
+      });
+
+      // Pengurutan
+      if (sort === 'terlaris') {
+        filtered.sort((a, b) => b.jumlahTerjual - a.jumlahTerjual);
+      } else if (sort === 'harga-asc') {
+        filtered.sort((a, b) => a.harga - b.harga);
+      } else if (sort === 'harga-desc') {
+        filtered.sort((a, b) => b.harga - a.harga);
+      } else if (sort === 'nama') {
+        filtered.sort((a, b) => a.nama.localeCompare(b.nama));
+      }
+
+      const grid = document.getElementById('productGrid');
+      const noMsg = document.getElementById('noProductMsg');
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '';
+        noMsg.classList.remove('hidden');
+      } else {
+        noMsg.classList.add('hidden');
+        grid.innerHTML = filtered.map(p => productCardHTML(p)).join('');
+      }
+    }
+
+    function filterByCategory(katId) {
+      showPage('katalog');
+      document.getElementById('categoryFilter').value = katId;
+      document.getElementById('searchInput').value = '';
+      filterProducts();
+    }
+
+    // Detail produk
+    function showProductDetail(id) {
+      const p = PRODUCTS.find(prod => prod.id === id);
+      if (!p) return;
+      currentDetailQty = 1;
+
+      let stockClass = 'stock-ready';
+      let stockText = `Stok: ${p.stok}`;
+      if (p.stok === 0) { stockClass = 'stock-out'; stockText = 'Stok Habis'; }
+      else if (p.stok <= 10) { stockClass = 'stock-low'; }
+
+      document.getElementById('productDetailContent').innerHTML = `
+        <div>
+          <img class="detail-img" src="${p.gambar}" alt="${p.nama}"
+               onerror="this.src='https://via.placeholder.com/500x400?text=Produk'">
+        </div>
+        <div class="detail-info">
+          <div class="product-category">${getKategoriNama(p.kategori)}</div>
+          <h1>${p.nama}</h1>
+          <div class="detail-price">${formatRupiah(p.harga)}</div>
+          <span class="stock-badge ${stockClass}">${stockText}</span>
+          <span style="margin-left:12px;font-size:0.9rem;color:var(--text-light);">Terjual: ${p.jumlahTerjual}</span>
+
+          <div class="detail-section">
+            <h3>Deskripsi</h3>
+            <p>${p.deskripsiLengkap || p.deskripsi}</p>
+          </div>
+          ${p.manfaat ? `<div class="detail-section"><h3>Manfaat</h3><p>${p.manfaat}</p></div>` : ''}
+          ${p.caraPakai ? `<div class="detail-section"><h3>Cara Penggunaan</h3><p>${p.caraPakai}</p></div>` : ''}
+
+          <div class="qty-control">
+            <button onclick="changeDetailQty(-1)">−</button>
+            <span id="detailQty">1</span>
+            <button onclick="changeDetailQty(1)">+</button>
+          </div>
+
+          <button class="btn btn-primary" style="margin-top:8px;" onclick="addToCart(${p.id}, currentDetailQty)" ${p.stok === 0 ? 'disabled' : ''}>
+            🛒 Tambah ke Keranjang
+          </button>
+        </div>
+      `;
+      showPage('detail');
+    }
+
+    function changeDetailQty(delta) {
+      const p = PRODUCTS.find(prod => prod.id === parseInt(document.querySelector('#productDetailContent .btn-primary')?.getAttribute('onclick')?.match(/\d+/)?.[0] || 0));
+      // Simpler: just update the displayed qty
+      currentDetailQty = Math.max(1, currentDetailQty + delta);
+      // Limit by stock if we can find it
+      const qtyEl = document.getElementById('detailQty');
+      if (qtyEl) qtyEl.textContent = currentDetailQty;
+    }
+
+    // Render keranjang
+    function renderCart() {
+      const container = document.getElementById('cartContent');
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <div class="icon">🛒</div>
+            <h3>Keranjang masih kosong</h3>
+            <p>Yuk mulai belanja produk berkualitas!</p>
+            <button class="btn btn-primary" style="margin-top:16px;" onclick="showPage('katalog')">Lihat Katalog</button>
+          </div>
+        `;
+        return;
+      }
+
+      const itemsHTML = cart.map(item => `
+        <div class="cart-item">
+          <img src="${item.gambar}" alt="${item.nama}" onerror="this.src='https://via.placeholder.com/80'">
+          <div>
+            <div class="cart-item-name">${item.nama}</div>
+            <div style="font-size:0.85rem;color:var(--text-light);">${formatRupiah(item.harga)} / item</div>
+          </div>
+          <div class="qty-control">
+            <button onclick="updateCartQty(${item.id}, -1)">−</button>
+            <span>${item.qty}</span>
+            <button onclick="updateCartQty(${item.id}, 1)">+</button>
+          </div>
+          <div class="cart-item-price">${formatRupiah(item.harga * item.qty)}</div>
+          <button class="btn btn-danger btn-sm" onclick="removeFromCart(${item.id})">Hapus</button>
+        </div>
+      `).join('');
+
+      const subtotal = getCartSubtotal();
+      const totalItems = cart.reduce((s, i) => s + i.qty, 0);
+
+      container.innerHTML = `
+        <div class="cart-table">${itemsHTML}</div>
+        <div class="cart-summary">
+          <div class="cart-summary-row">
+            <span>Total Barang</span>
+            <span>${totalItems} item</span>
+          </div>
+          <div class="cart-summary-row total">
+            <span>Subtotal</span>
+            <span>${formatRupiah(subtotal)}</span>
+          </div>
+          <button class="btn btn-primary btn-block" style="margin-top:16px;" onclick="showPage('checkout')">
+            Lanjut ke Checkout
+          </button>
+        </div>
+      `;
+    }
+
+    // Isi dropdown wilayah & update ringkasan checkout
+    function initCheckout() {
+      const select = document.getElementById('checkoutRegion');
+      select.innerHTML = '<option value="">-- Pilih Wilayah --</option>' +
+        WILAYAH_DATA.map(w => `<option value="${w.nama}">${w.nama} (${w.jarakKm} km)</option>`).join('');
+
+      // Prefill nama dari user
+      if (currentUser) {
+        document.getElementById('checkoutName').value = currentUser.nama || '';
+      }
+
+      updateCheckoutSummary();
+    }
+
+    function updateShippingCost() {
+      updateCheckoutSummary();
+    }
+
+    function updateCheckoutSummary() {
+      const region = document.getElementById('checkoutRegion').value;
+      const shipping = region ? hitungBiayaPengiriman(region) : { biaya: 0, jarak: 0 };
+      const subtotal = getCartSubtotal();
+      const total = subtotal + shipping.biaya;
+
+      document.getElementById('checkoutSummary').innerHTML = `
+        <h3>Ringkasan Pesanan</h3>
+        ${cart.map(item => `
+          <div class="summary-item">
+            <span>${item.nama} × ${item.qty}</span>
+            <span>${formatRupiah(item.harga * item.qty)}</span>
+          </div>
+        `).join('')}
+        <div class="summary-item" style="margin-top:12px;">
+          <span>Subtotal Produk</span>
+          <span>${formatRupiah(subtotal)}</span>
+        </div>
+        <div class="summary-item">
+          <span>Jarak Wilayah</span>
+          <span>${shipping.jarak} km</span>
+        </div>
+        <div class="summary-item">
+          <span>Biaya Pengiriman</span>
+          <span>${formatRupiah(shipping.biaya)}</span>
+        </div>
+        <div class="summary-item" style="font-weight:700;font-size:1.1rem;border-top:2px solid var(--border);padding-top:12px;margin-top:8px;">
+          <span>Total Pembayaran</span>
+          <span style="color:var(--primary);">${formatRupiah(total)}</span>
+        </div>
+      `;
+    }
+
+    // Render halaman pembayaran
+    function renderPayment(order) {
+      document.getElementById('paymentInfo').innerHTML = `
+        <p style="margin-bottom:8px;">Silakan transfer ke rekening berikut:</p>
+        <div class="bank-name">${BANK_INFO.bankName}</div>
+        <div style="margin:8px 0;">a.n. <strong>${BANK_INFO.accountName}</strong></div>
+        <div class="account-number" id="accountNumberDisplay">${BANK_INFO.accountNumber}</div>
+        <div style="margin-top:16px;font-size:1.1rem;">
+          Total Transfer: <strong style="color:var(--primary);font-size:1.4rem;">${formatRupiah(order.total)}</strong>
+        </div>
+        <p style="margin-top:20px;font-size:0.9rem;color:var(--text-light);">
+          Silakan lakukan pembayaran sesuai total yang tercantum. Pesanan akan diproses setelah pembayaran dikonfirmasi.
+        </p>
+      `;
+    }
+
+    function copyAccountNumber() {
+      navigator.clipboard.writeText(BANK_INFO.accountNumber).then(() => {
+        showToast('Nomor rekening berhasil disalin!');
+      }).catch(() => {
+        showToast('Gagal menyalin, silakan salin manual', 'error');
+      });
+    }
+
+    function confirmPayment() {
+      if (!currentOrder) return;
+      // Update status pesanan
+      const orders = getOrders();
+      const idx = orders.findIndex(o => o.id === currentOrder.id);
+      if (idx !== -1) {
+        orders[idx].status = 'Pembayaran Dikonfirmasi';
+        localStorage.setItem(`tokosehat_orders_${currentUser.email}`, JSON.stringify(orders));
+      }
+      // Kosongkan keranjang
+      cart = [];
+      saveCart();
+      currentOrder = null;
+      showToast('Terima kasih! Pembayaran Anda sedang diverifikasi.');
+      showPage('orders');
+    }
+
+    // Render riwayat pesanan
+    function renderOrders() {
+      const orders = getOrders();
+      const container = document.getElementById('ordersContent');
+
+      if (orders.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <div class="icon">📦</div>
+            <h3>Belum ada pesanan</h3>
+            <p>Pesanan Anda akan muncul di sini setelah checkout.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = orders.map(order => {
+        let statusClass = 'status-menunggu';
+        if (order.status === 'Pembayaran Dikonfirmasi') statusClass = 'status-dikonfirmasi';
+        else if (order.status === 'Diproses') statusClass = 'status-diproses';
+        else if (order.status === 'Selesai') statusClass = 'status-selesai';
+
+        return `
+          <div class="order-card">
+            <div class="order-header">
+              <div>
+                <strong>Pesanan #${order.id}</strong>
+                <div style="font-size:0.85rem;color:var(--text-light);">${order.tanggal}</div>
+              </div>
+              <span class="order-status ${statusClass}">${order.status}</span>
+            </div>
+            <div style="font-size:0.9rem;margin-bottom:8px;">
+              ${order.items.map(i => `${i.nama} × ${i.qty}`).join(', ')}
+            </div>
+            <div style="display:flex;justify-content:space-between;font-weight:600;">
+              <span>Total: ${formatRupiah(order.total)}</span>
+              <span style="font-size:0.85rem;color:var(--text-light);">${order.wilayah}</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    /* ============================================================
+       NAVIGASI HALAMAN
+       ============================================================ */
+    function showPage(page) {
+      // Sembunyikan semua halaman
+      ['home', 'katalog', 'detail', 'cart', 'checkout', 'payment', 'orders'].forEach(p => {
+        const el = document.getElementById('page-' + p);
+        if (el) el.classList.add('hidden');
+      });
+
+      // Tampilkan halaman yang diminta
+      const target = document.getElementById('page-' + page);
+      if (target) target.classList.remove('hidden');
+
+      // Tutup menu mobile
+      document.getElementById('navMenu').classList.remove('open');
+
+      // Jalankan render sesuai halaman
+      if (page === 'katalog') {
+        // Isi filter kategori jika belum
+        const select = document.getElementById('categoryFilter');
+        if (select.options.length <= 1) {
+          KATEGORI_LIST.forEach(k => {
+            const opt = document.createElement('option');
+            opt.value = k.id;
+            opt.textContent = k.nama;
+            select.appendChild(opt);
+          });
+        }
+        filterProducts();
+      } else if (page === 'cart') {
+        renderCart();
+      } else if (page === 'checkout') {
+        if (cart.length === 0) {
+          showToast('Keranjang masih kosong', 'error');
+          showPage('katalog');
+          return;
+        }
+        initCheckout();
+      } else if (page === 'orders') {
+        renderOrders();
+      } else if (page === 'home') {
+        renderHomeCategories();
+        renderBestSellers();
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* ============================================================
+       EVENT LISTENERS
+       ============================================================ */
+
+    // Toggle menu mobile
+    document.getElementById('menuToggle').addEventListener('click', () => {
+      document.getElementById('navMenu').classList.toggle('open');
+    });
+
+    // Back to top visibility
+    window.addEventListener('scroll', () => {
+      const btn = document.getElementById('backToTop');
+      if (window.scrollY > 400) btn.classList.add('show');
+      else btn.classList.remove('show');
+    });
+
+    // Auth switch Login <-> Daftar
+    let isRegisterMode = false;
+    document.getElementById('authSwitchBtn').addEventListener('click', () => {
+      isRegisterMode = !isRegisterMode;
+      document.getElementById('loginForm').classList.toggle('hidden', isRegisterMode);
+      document.getElementById('registerForm').classList.toggle('hidden', !isRegisterMode);
+      document.getElementById('authTitle').textContent = isRegisterMode ? 'Daftar Akun' : 'Masuk';
+      document.getElementById('authSubtitle').textContent = isRegisterMode
+        ? 'Buat akun baru untuk mulai berbelanja'
+        : 'Masuk ke akun Anda untuk berbelanja';
+      document.getElementById('authSwitchText').textContent = isRegisterMode
+        ? 'Sudah punya akun?'
+        : 'Belum punya akun?';
+      document.getElementById('authSwitchBtn').textContent = isRegisterMode
+        ? 'Masuk di sini'
+        : 'Daftar sekarang';
+      document.getElementById('authError').style.display = 'none';
+    });
+
+    // Login form
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const emailOrUser = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value;
+      const users = getUsers();
+      const user = users.find(u =>
+        (u.email === emailOrUser || u.username === emailOrUser) && u.password === password
+      );
+
+      if (user) {
+        setCurrentUser(user);
+        document.getElementById('authPage').classList.add('hidden');
+        document.getElementById('app').classList.remove('hidden');
+        loadCart();
+        showPage('home');
+        showToast(`Selamat datang, ${user.nama}!`);
+      } else {
+        const err = document.getElementById('authError');
+        err.textContent = 'Email/username atau password salah.';
+        err.style.display = 'block';
+      }
+    });
+
+    // Register form
+    document.getElementById('registerForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nama = document.getElementById('regName').value.trim();
+      const email = document.getElementById('regEmail').value.trim();
+      const username = document.getElementById('regUsername').value.trim();
+      const password = document.getElementById('regPassword').value;
+
+      const users = getUsers();
+      if (users.find(u => u.email === email)) {
+        const err = document.getElementById('authError');
+        err.textContent = 'Email sudah terdaftar.';
+        err.style.display = 'block';
+        return;
+      }
+      if (users.find(u => u.username === username)) {
+        const err = document.getElementById('authError');
+        err.textContent = 'Username sudah digunakan.';
+        err.style.display = 'block';
+        return;
+      }
+
+      const newUser = { nama, email, username, password, createdAt: new Date().toISOString() };
+      users.push(newUser);
+      saveUsers(users);
+      setCurrentUser(newUser);
+
+      document.getElementById('authPage').classList.add('hidden');
+      document.getElementById('app').classList.remove('hidden');
+      loadCart();
+      showPage('home');
+      showToast('Pendaftaran berhasil! Selamat datang.');
+    });
+
+    // Checkout form
+    document.getElementById('checkoutForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const nama = document.getElementById('checkoutName').value.trim();
+      const whatsapp = document.getElementById('checkoutWhatsapp').value.trim();
+      const alamat = document.getElementById('checkoutAddress').value.trim();
+      const wilayah = document.getElementById('checkoutRegion').value;
+      const catatan = document.getElementById('checkoutNote').value.trim();
+
+      if (!nama || !whatsapp || !alamat || !wilayah) {
+        showToast('Mohon lengkapi semua data wajib', 'error');
+        return;
+      }
+
+      const shipping = hitungBiayaPengiriman(wilayah);
+      const subtotal = getCartSubtotal();
+      const total = subtotal + shipping.biaya;
+
+      const order = {
+        id: Date.now().toString().slice(-8),
+        tanggal: new Date().toLocaleString('id-ID'),
+        items: cart.map(i => ({ ...i })),
+        subtotal,
+        biayaPengiriman: shipping.biaya,
+        jarak: shipping.jarak,
+        total,
+        nama,
+        whatsapp,
+        alamat,
+        wilayah,
+        catatan,
+        status: 'Menunggu Pembayaran'
+      };
+
+      saveOrder(order);
+      currentOrder = order;
+      renderPayment(order);
+      showPage('payment');
+    });
+
+    /* ============================================================
+       INISIALISASI APLIKASI
+       ============================================================ */
+    function init() {
+      // Cek apakah user sudah login
+      currentUser = getCurrentUser();
+      if (currentUser) {
+        document.getElementById('authPage').classList.add('hidden');
+        document.getElementById('app').classList.remove('hidden');
+        loadCart();
+        showPage('home');
+      }
+      // Jika belum login, tetap di halaman auth
+    }
+
+    // Jalankan saat halaman siap
+    init();
+  </script>
+</body>
+</html>
