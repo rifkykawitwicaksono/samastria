@@ -1375,41 +1375,43 @@
     function applyRegionPrices(){PRODUCTS.forEach(p=>{p.hargaTampil=productPrice(p)});renderHomeCategories();renderBestSellers();filterProducts();renderCart();updateCheckoutSummary();}
     async function resolvePriceRegion(){const province=document.getElementById('checkoutProvince')?.value||'';const city=document.getElementById('checkoutCity')?.value.trim()||'';priceRegion=null;const hint=document.getElementById('priceRegionHint');if(!province){if(hint)hint.textContent='Pilih provinsi dan isi kabupaten/kota untuk menentukan harga wilayah.';applyRegionPrices();return null;}const {data,error}=await db.rpc('get_price_region',{p_province:province,p_city:city});if(error){if(hint)hint.textContent='Wilayah belum dapat diperiksa. Harga final tetap dihitung server saat checkout.';applyRegionPrices();return null;}priceRegion=data||null;if(hint)hint.textContent=data?`Harga wilayah: ${data}. Harga final dikunci oleh server saat pesanan dibuat.`:'Kabupaten/kota belum cocok dengan pembagian wilayah. Periksa kembali alamat.';applyRegionPrices();return data;}
     async function loadProducts(){
-      /*
-       * Ambil katalog tanpa bergantung pada nama/tipe kolom active.
-       * Beberapa versi tabel products Samastria menyimpan status aktif
-       * dengan active, status, atau keduanya. Filter dilakukan setelah
-       * data diterima agar katalog tidak kosong hanya karena perbedaan
-       * struktur kolom.
-       */
-      const {data,error}=await db.from('products').select('*').order('id');
-      if(error) throw error;
+  const {data,error}=await db
+    .from('products')
+    .select('*')
+    .order('id');
 
-      const rows = data || [];
-      const hasActive = rows.some(p => Object.prototype.hasOwnProperty.call(p,'active'));
+  if(error) throw error;
 
-      const activeRows = rows.filter(p => {
-        if(hasActive){
-          const v = p.active;
-          return v === true || v === 1 || v === '1' || v === 'true' || v === 'TRUE';
-        }
+  const rows=data||[];
 
-        const st = String(p.status ?? '').trim().toLowerCase();
-        if(!st) return true;
-        return !['inactive','nonaktif','non-aktif','tidak aktif','disabled','arsip','arsived','dihapus'].includes(st);
-      });
+  const activeRows=rows.filter(p=>{
+    const status=String(p.status??'').trim().toLowerCase();
 
-      PRODUCTS = activeRows.map(mapProduct);
+    return ![
+      'inactive',
+      'nonaktif',
+      'non-aktif',
+      'tidak aktif',
+      'disabled',
+      'arsip',
+      'archived',
+      'arsived',
+      'dihapus',
+      'deleted'
+    ].includes(status);
+  });
 
-      console.log('SAMASTRIA katalog:', {
-        totalRows: rows.length,
-        activeRows: activeRows.length
-      });
+  PRODUCTS=activeRows.map(mapProduct);
 
-      renderHomeCategories();
-      renderBestSellers();
-      filterProducts();
-    }
+  console.log('SAMASTRIA katalog:',{
+    totalRows:rows.length,
+    activeRows:activeRows.length
+  });
+
+  renderHomeCategories();
+  renderBestSellers();
+  filterProducts();
+}
     async function getProfile(id,authUser=null){
       if(!db) throw new Error('Koneksi Supabase belum tersedia.');
       const {data,error}=await db.from('profiles').select('id,nama,email,username,role').eq('id',id).single();
