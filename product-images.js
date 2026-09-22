@@ -1,25 +1,198 @@
-window.SAMASTRIA_PRODUCT_IMAGES = [{"name":"AERO 810 (Perekat Perata Pembasah)","category":"PRODUK AGROKOMPLEKS","path":"assets/products/produk-agrokompleks__AERO-810-Perekat-Perata-Pembasah.webp"},{"name":"BEVERA WP","category":"PRODUK AGROKOMPLEKS","path":"assets/products/produk-agrokompleks__BEVERA-WP.webp"},{"name":"BIANG SUBUR ALAMI (Biangnya Pupuk Organik Cair)","category":"PRODUK AGROKOMPLEKS","path":"assets/products/produk-agrokompleks__BIANG-SUBUR-ALAMI-Biangnya-Pupuk-Organik-Cair.webp"},{"name":"CORRIN  Anti Kresek, Blast, Jamur","category":"PRODUK AGROKOMPLEKS","path":"assets/products/produk-agrokompleks__CORRIN-Anti-Kresek-Blast-Jamur.webp"},{"name":"GLIOTRI WPI","category":"PRODUK AGROKOMPLEKS","path":"assets/products/produk-agrokompleks__GLIOTRI-WPI.webp"},{"name":"GREENSTAR","category":"PRODUK AGROKOMPLEKS","path":"assets/products/produk-agrokompleks__GREENSTAR.webp"},{"name":"METILAT LEM SL (Perangkap Lalat Buah)","category":"PRODUK AGROKOMPLEKS","path":"assets/products/produk-agrokompleks__METILAT-LEM-SL-Perangkap-Lalat-Buah.webp"},{"name":"ORGANINDO  (Pupuk Organik Granule) 10KG","category":"PRODUK AGROKOMPLEKS","path":"assets/products/produk-agrokompleks__ORGANINDO-Pupuk-Organik-Granule-10KG.webp"},{"name":"ORGANINDO  (Pupuk Organik Granule) 25KG","category":"PRODUK AGROKOMPLEKS","path":"assets/products/produk-agrokompleks__ORGANINDO-Pupuk-Organik-Granule-25KG.webp"},{"name":"ORGANINDO  (Pupuk Organik Granule) 5KG","category":"PRODUK AGROKOMPLEKS","path":"assets/products/produk-agrokompleks__ORGANINDO-Pupuk-Organik-Granule-5KG.webp"},{"name":"POCNASA 250 cc","category":"PRODUK AGROKOMPLEKS","path":"assets/products/produk-agrokompleks__POCNASA-250-cc.webp"},{"name":"POCNASA 3 liter","category":"PRODUK AGROKOMPLEKS","path":"assets/products/produk-agrokompleks__POCNASA-3-liter.webp"},{"name":"POCNASA 500 cc","category":"PRODUK AGROKOMPLEKS","path":"assets/products/produk-agrokompleks__POCNASA-500-cc.webp"},{"name":"PPTHORMONIK 100 cc","category":"PRODUK AGROKOMPLEKS","path":"assets/products/produk-agrokompleks__PPTHORMONIK-100-cc.webp"},{"name":"PPTHORMONIK 500 cc","category":"PRODUK AGROKOMPLEKS","path":"assets/products/produk-agrokompleks__PPTHORMONIK-500-cc.webp"},{"name":"SPRNASA 250 gram","category":"PRODUK AGROKOMPLEKS","path":"assets/products/produk-agrokompleks__SPRNASA-250-gram.webp"},{"name":"SPRNASA 3 kg","category":"PRODUK AGROKOMPLEKS","path":"assets/products/produk-agrokompleks__SPRNASA-3-kg.webp"},{"name":"TANDUR","category":"PRODUK AGROKOMPLEKS","path":"assets/products/produk-agrokompleks__TANDUR.webp"},{"name":"TANGGUH  Pupuk Hayati Cair","category":"PRODUK AGROKOMPLEKS","path":"assets/products/produk-agrokompleks__TANGGUH-Pupuk-Hayati-Cair.webp"},{"name":"TON (Tambak Organik Nusantara) 250 gram","category":"PRODUK AGROKOMPLEKS","path":"assets/products/produk-agrokompleks__TON-Tambak-Organik-Nusantara-250-gram.webp"},{"name":"TON (Tambak Organik Nusantara) 3 kg","category":"PRODUK AGROKOMPLEKS","path":"assets/products/produk-agrokompleks__TON-Tambak-Organik-Nusantara-3-kg.webp"},{"name":"VITERNA","category":"PRODUK AGROKOMPLEKS","path":"assets/products/produk-agrokompleks__VITERNA.webp"},{"name":"KECAP SEDAP NATURAL SENASA","category":"PRODUK HOME CARE","path":"assets/products/produk-home-care__KECAP-SEDAP-NATURAL-SENASA.webp"},{"name":"PASTA GIGI NASA JUNIOR - TUTTY JUNIOR","category":"PRODUK HOME CARE","path":"assets/products/produk-home-care__PASTA-GIGI-NASA-JUNIOR---TUTTY-JUNIOR.webp"},{"name":"PASTA GIGI NASA PLUS GARAM HIMALAYA DAN EUCALYPTUS","category":"PRODUK HOME CARE","path":"assets/products/produk-home-care__PASTA-GIGI-NASA-PLUS-GARAM-HIMALAYA-DAN-EUCALYPTUS.webp"},{"name":"PASTA GIGI NASA","category":"PRODUK HOME CARE","path":"assets/products/produk-home-care__PASTA-GIGI-NASA.webp"},{"name":"TEH HITAM CELUP TCN","category":"PRODUK HOME CARE","path":"assets/products/produk-home-care__TEH-HITAM-CELUP-TCN.webp"},{"name":"TEH TBN","category":"PRODUK HOME CARE","path":"assets/products/produk-home-care__TEH-TBN.webp"},{"name":"AL QURAN Multimedia Pen AL JAZEERAH","category":"PRODUK INOVASI TEKNOLOGI","path":"assets/products/produk-inovasi-teknologi__AL-QURAN-Multimedia-Pen-AL-JAZEERAH.webp"},{"name":"AMNE","category":"PRODUK KESEHATAN","path":"assets/products/produk-kesehatan__AMNE.webp"},{"name":"AMOTEE","category":"PRODUK KESEHATAN","path":"assets/products/produk-kesehatan__AMOTEE.webp"},{"name":"B10 NASATM","category":"PRODUK KESEHATAN","path":"assets/products/produk-kesehatan__B10-NASATM.webp"},{"name":"CALSEA","category":"PRODUK KESEHATAN","path":"assets/products/produk-kesehatan__CALSEA.webp"},{"name":"CORDYMUNE","category":"PRODUK KESEHATAN","path":"assets/products/produk-kesehatan__CORDYMUNE.webp"},{"name":"CURCUMED","category":"PRODUK KESEHATAN","path":"assets/products/produk-kesehatan__CURCUMED.webp"},{"name":"DEPRO","category":"PRODUK KESEHATAN","path":"assets/products/produk-kesehatan__DEPRO.webp"},{"name":"ENBEPE","category":"PRODUK KESEHATAN","path":"assets/products/produk-kesehatan__ENBEPE.webp"},{"name":"ENELCETE","category":"PRODUK KESEHATAN","path":"assets/products/produk-kesehatan__ENELCETE.webp"},{"name":"HERBAGYN","category":"PRODUK KESEHATAN","path":"assets/products/produk-kesehatan__HERBAGYN.webp"},{"name":"HERBATHUS","category":"PRODUK KESEHATAN","path":"assets/products/produk-kesehatan__HERBATHUS.webp"},{"name":"HU WHANG TEA","category":"PRODUK KESEHATAN","path":"assets/products/produk-kesehatan__HU-WHANG-TEA.webp"},{"name":"JAVABET (Khusus Untuk Diabetes)","category":"PRODUK KESEHATAN","path":"assets/products/produk-kesehatan__JAVABET-Khusus-Untuk-Diabetes.webp"},{"name":"JOZUX  Hygiene For Man Spray","category":"PRODUK KESEHATAN","path":"assets/products/produk-kesehatan__JOZUX-Hygiene-For-Man-Spray.webp"},{"name":"KARU COKLAT","category":"PRODUK KESEHATAN","path":"assets/products/produk-kesehatan__KARU-COKLAT.webp"},{"name":"KARU VANILA","category":"PRODUK KESEHATAN","path":"assets/products/produk-kesehatan__KARU-VANILA.webp"},{"name":"LECITH","category":"PRODUK KESEHATAN","path":"assets/products/produk-kesehatan__LECITH.webp"},{"name":"N-CHLO","category":"PRODUK KESEHATAN","path":"assets/products/produk-kesehatan__N-CHLO.webp"},{"name":"OKSYA","category":"PRODUK KESEHATAN","path":"assets/products/produk-kesehatan__OKSYA.webp"},{"name":"OX-PW","category":"PRODUK KESEHATAN","path":"assets/products/produk-kesehatan__OX-PW.webp"},{"name":"QUWLESS - MASSAGE OIL","category":"PRODUK KESEHATAN","path":"assets/products/produk-kesehatan__QUWLESS---MASSAGE-OIL.webp"},{"name":"ROSE-V","category":"PRODUK KESEHATAN","path":"assets/products/produk-kesehatan__ROSE-V.webp"},{"name":"ROYAL HONEY KIDS ENVELLA (Madu Untuk Anak)","category":"PRODUK KESEHATAN","path":"assets/products/produk-kesehatan__ROYAL-HONEY-KIDS-ENVELLA-Madu-Untuk-Anak.webp"},{"name":"ROYAL JELLY","category":"PRODUK KESEHATAN","path":"assets/products/produk-kesehatan__ROYAL-JELLY.webp"},{"name":"RS-SINOV (Untuk Sendi)","category":"PRODUK KESEHATAN","path":"assets/products/produk-kesehatan__RS-SINOV-Untuk-Sendi.webp"},{"name":"SBMN 250g","category":"PRODUK KESEHATAN","path":"assets/products/produk-kesehatan__SBMN-250g.webp"},{"name":"SBMN 500g","category":"PRODUK KESEHATAN","path":"assets/products/produk-kesehatan__SBMN-500g.webp"},{"name":"SKE 72 - Susu Kambing Etawa","category":"PRODUK KESEHATAN","path":"assets/products/produk-kesehatan__SKE-72---Susu-Kambing-Etawa.webp"},{"name":"SUNPRO - Propolis KIDS","category":"PRODUK KESEHATAN","path":"assets/products/produk-kesehatan__SUNPRO---Propolis-KIDS.webp"},{"name":"SUNPRO Nano Propolis 6 ml","category":"PRODUK KESEHATAN","path":"assets/products/produk-kesehatan__SUNPRO-Nano-Propolis-6-ml.webp"},{"name":"TEH GURAH","category":"PRODUK KESEHATAN","path":"assets/products/produk-kesehatan__TEH-GURAH.webp"},{"name":"VCO MUTIA","category":"PRODUK KESEHATAN","path":"assets/products/produk-kesehatan__VCO-MUTIA.webp"},{"name":"VITANOSTEEN","category":"PRODUK KESEHATAN","path":"assets/products/produk-kesehatan__VITANOSTEEN.webp"},{"name":"AYLA 4D Eyebrow Pen - Aeena Brown","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__AYLA-4D-Eyebrow-Pen---Aeena-Brown.webp"},{"name":"AYLA 4D Eyebrow Pen - Aleena Grey Brown","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__AYLA-4D-Eyebrow-Pen---Aleena-Grey-Brown.webp"},{"name":"AYLA COLOR Stay Eyeliner - Daavina Black","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__AYLA-COLOR-Stay-Eyeliner---Daavina-Black.webp"},{"name":"AYLA PUERARIA CREAM","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__AYLA-PUERARIA-CREAM.webp"},{"name":"COLLASKIN GOLD - BODY LOTION","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__COLLASKIN-GOLD---BODY-LOTION.webp"},{"name":"COLLASKIN  GOLD - Collagen & Aloevera Shampoo","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__COLLASKIN-GOLD---Collagen-Aloevera-Shampoo.webp"},{"name":"COLLASKIN  GOLD - COLLAGEN  SOAP (PAKET COSKIN)","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__COLLASKIN-GOLD---COLLAGEN-SOAP-PAKET-COSKIN.webp"},{"name":"COLLASKIN  GOLD - FACIAL CLEANSER","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__COLLASKIN-GOLD---FACIAL-CLEANSER.webp"},{"name":"COLLASKIN-T","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__COLLASKIN-T.webp"},{"name":"COLLASKINDRINK (Minuman Serbuk Rasa Lemon)","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__COLLASKINDRINK-Minuman-Serbuk-Rasa-Lemon.webp"},{"name":"CRYSTAL-X TISU","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__CRYSTAL-X-TISU.webp"},{"name":"CRYSTAL-X","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__CRYSTAL-X.webp"},{"name":"ERHSALI - Blue Butterfly Pea Soap Enrich With Collagen","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__ERHSALI---Blue-Butterfly-Pea-Soap-Enrich-With-Collagen.webp"},{"name":"ERHSALI - Brightening Soap","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__ERHSALI---Brightening-Soap.webp"},{"name":"ERHSALI - CHARCOAL LIQUID","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__ERHSALI---CHARCOAL-LIQUID.webp"},{"name":"ERHSALI - FISH COLLAGEN SOAP","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__ERHSALI---FISH-COLLAGEN-SOAP.webp"},{"name":"ERHSALI - Peeling Spray","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__ERHSALI---Peeling-Spray.webp"},{"name":"ERSHALI - ACNE SOAP","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__ERSHALI---ACNE-SOAP.webp"},{"name":"ERSHALI - CHARCOAL","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__ERSHALI---CHARCOAL.webp"},{"name":"JAVALGAE Chlorella Facial Soap With Collagen","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__JAVALGAE-Chlorella-Facial-Soap-With-Collagen.webp"},{"name":"MORESKIN - ACNE SERIES","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---ACNE-SERIES.webp"},{"name":"MORESKIN - All White & Glow Serum","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---All-White-Glow-Serum.webp"},{"name":"MORESKIN - Aloe Vera Shooting Gel 100 gram","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---Aloe-Vera-Shooting-Gel-100-gram.webp"},{"name":"MORESKIN - Aloe Vera Shooting Gel 250 gram","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---Aloe-Vera-Shooting-Gel-250-gram.webp"},{"name":"MORESKIN - ANTI ACNE","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---ANTI-ACNE.webp"},{"name":"MORESKIN - BB CUSHION BRIGHT","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---BB-CUSHION-BRIGHT.webp"},{"name":"MORESKIN - BB CUSHION NATURAL","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---BB-CUSHION-NATURAL.webp"},{"name":"MORESKIN - BODY BUTTER WHITENING GOLD","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---BODY-BUTTER-WHITENING-GOLD.webp"},{"name":"MORESKIN - BODY WASH GLOW","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---BODY-WASH-GLOW.webp"},{"name":"MORESKIN - BODY WASH NATURE","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---BODY-WASH-NATURE.webp"},{"name":"MORESKIN - BODY WASH YOGURT","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---BODY-WASH-YOGURT.webp"},{"name":"MORESKIN - CLEAN & GLOW CREAM","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---CLEAN-GLOW-CREAM.webp"},{"name":"MORESKIN  - Clean & Glow Lite Cream","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---Clean-Glow-Lite-Cream.webp"},{"name":"MORESKIN - Color Correction Cream Bright","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---Color-Correction-Cream-Bright.webp"},{"name":"MORESKIN - Color Correction Cream Natural","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---Color-Correction-Cream-Natural.webp"},{"name":"MORESKIN - DARK SPOT SERUM","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---DARK-SPOT-SERUM.webp"},{"name":"MORESKIN - DAY CREAM","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---DAY-CREAM.webp"},{"name":"MORESKIN - DOUBLE DIAMOND SKIN - CLEANSER","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---DOUBLE-DIAMOND-SKIN---CLEANSER.webp"},{"name":"MORESKIN - DOUBLE DIAMOND SKIN - DAY CREAM","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---DOUBLE-DIAMOND-SKIN---DAY-CREAM.webp"},{"name":"MORESKIN - DOUBLE DIAMOND SKIN - NIGHT CREAM","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---DOUBLE-DIAMOND-SKIN---NIGHT-CREAM.webp"},{"name":"MORESKIN - DOUBLE DIAMOND SKIN - SERUM","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---DOUBLE-DIAMOND-SKIN---SERUM.webp"},{"name":"MORESKIN - DOUBLE DIAMOND SKIN PAKET","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---DOUBLE-DIAMOND-SKIN-PAKET.webp"},{"name":"MORESKIN - EAU DE PARFUM - ROYAL BLACK FOR MEN","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---EAU-DE-PARFUM---ROYAL-BLACK-FOR-MEN.webp"},{"name":"MORESKIN - EAU DE PARFUM - ROYAL BLEU DE","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---EAU-DE-PARFUM---ROYAL-BLEU-DE.webp"},{"name":"MORESKIN - EAU DE PARFUM - ROYAL CHERRY AIR","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---EAU-DE-PARFUM---ROYAL-CHERRY-AIR.webp"},{"name":"MORESKIN - EAU DE PARFUM - ROYAL FEMME","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---EAU-DE-PARFUM---ROYAL-FEMME.webp"},{"name":"MORESKIN - EAU DE PARFUM - ROYAL PARIS","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---EAU-DE-PARFUM---ROYAL-PARIS.webp"},{"name":"MORESKIN - EXFOLIANT CREAM","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---EXFOLIANT-CREAM.webp"},{"name":"MORESKIN - EYELINER","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---EYELINER.webp"},{"name":"MORESKIN - Face Mask Blueberry","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---Face-Mask-Blueberry.webp"},{"name":"MORESKIN - Face Mask Strawberry","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---Face-Mask-Strawberry.webp"},{"name":"MORESKIN - Face Primer","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---Face-Primer.webp"},{"name":"MORESKIN - FACIAL WASH CREAM","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---FACIAL-WASH-CREAM.webp"},{"name":"MORESKIN - FACIAL WASH FOR MEN","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---FACIAL-WASH-FOR-MEN.webp"},{"name":"MORESKIN - FIRST DAY CREAM WHITENING AND ANTI AGING","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---FIRST-DAY-CREAM-WHITENING-AND-ANTI-AGING.webp"},{"name":"MORESKIN - FIRST NIGHT CREAM WHITENING AND ANTI AGING","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---FIRST-NIGHT-CREAM-WHITENING-AND-ANTI-AGING.webp"},{"name":"MORESKIN - FIRST PREMIUM FACIAL FOAM ANTI AGING","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---FIRST-PREMIUM-FACIAL-FOAM-ANTI-AGING.webp"},{"name":"MORESKIN - FOOT CREAM","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---FOOT-CREAM.webp"},{"name":"MORESKIN - Foundation Perfect Match - Bright","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---Foundation-Perfect-Match---Bright.webp"},{"name":"MORESKIN - Foundation Perfect Match - Natural","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---Foundation-Perfect-Match---Natural.webp"},{"name":"MORESKIN - Full Coverage Concealer - Bright","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---Full-Coverage-Concealer---Bright.webp"},{"name":"MORESKIN - Full Coverage Concealer - Natural","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---Full-Coverage-Concealer---Natural.webp"},{"name":"MORESKIN - GLASS SKIN DAY CREAM","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---GLASS-SKIN-DAY-CREAM.webp"},{"name":"MORESKIN - GLASS SKIN NIGHT CREAM","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---GLASS-SKIN-NIGHT-CREAM.webp"},{"name":"MORESKIN - GLASS SKIN SERIES","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---GLASS-SKIN-SERIES.webp"},{"name":"MORESKIN - Hand & Body Lotion Breath Happines","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---Hand-Body-Lotion-Breath-Happines.webp"},{"name":"MORESKIN - Hand & Body Lotion Fresh Sparkling Snow","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---Hand-Body-Lotion-Fresh-Sparkling-Snow.webp"},{"name":"MORESKIN - Hand & Body Lotion Marshmallow","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---Hand-Body-Lotion-Marshmallow.webp"},{"name":"MORESKIN - LIP CREAM HAPPY BEAUTY","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---LIP-CREAM-HAPPY-BEAUTY.webp"},{"name":"MORESKIN - LIP CREAM MATTE 01","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---LIP-CREAM-MATTE-01.webp"},{"name":"MORESKIN - LIP CREAM MATTE 02","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---LIP-CREAM-MATTE-02.webp"},{"name":"MORESKIN - LIP CREAM MATTE 03","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---LIP-CREAM-MATTE-03.webp"},{"name":"MORESKIN - LIP CREAM MATTE 05","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---LIP-CREAM-MATTE-05.webp"},{"name":"MORESKIN - LIP CREAM MATTE 07","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---LIP-CREAM-MATTE-07.webp"},{"name":"MORESKIN - LIP CREAM MATTE 08","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---LIP-CREAM-MATTE-08.webp"},{"name":"MORESKIN - LIP CREAM MATTE 09","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---LIP-CREAM-MATTE-09.webp"},{"name":"MORESKIN - LIP CREAM MATTE 33","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---LIP-CREAM-MATTE-33.webp"},{"name":"MORESKIN - LOOSE POWDER BRIGHT","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---LOOSE-POWDER-BRIGHT.webp"},{"name":"MORESKIN - LOOSE POWDER NATURAL","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---LOOSE-POWDER-NATURAL.webp"},{"name":"MORESKIN - Magic Lipstick 01","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---Magic-Lipstick-01.webp"},{"name":"MORESKIN - Magic Lipstick 02","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---Magic-Lipstick-02.webp"},{"name":"MORESKIN - MAGIC TRANSPARAN LIPGLOSS","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---MAGIC-TRANSPARAN-LIPGLOSS.webp"},{"name":"MORESKIN - MASKARA","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---MASKARA.webp"},{"name":"MORESKIN - Micellar Water","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---Micellar-Water.webp"},{"name":"MORESKIN - Moisturizer Cream","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---Moisturizer-Cream.webp"},{"name":"MORESKIN - Moisturizing Lipstick 01 - Pink","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---Moisturizing-Lipstick-01---Pink.webp"},{"name":"MORESKIN - Moisturizing Lipstick 02 - Merah Maron","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---Moisturizing-Lipstick-02---Merah-Maron.webp"},{"name":"MORESKIN - Moisturizing Lipstick 03 - Merah Menyala","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---Moisturizing-Lipstick-03---Merah-Menyala.webp"},{"name":"MORESKIN - Moisturizing Lipstick 05 - Merah Bata","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---Moisturizing-Lipstick-05---Merah-Bata.webp"},{"name":"MORESKIN - Moisturizing Lipstick 07 - Merah Tua","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---Moisturizing-Lipstick-07---Merah-Tua.webp"},{"name":"MORESKIN - Moisturizing Lipstick 08 - Pink Menyala","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---Moisturizing-Lipstick-08---Pink-Menyala.webp"},{"name":"MORESKIN - Moisturizing Lipstick 09 - Coklat Muda","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---Moisturizing-Lipstick-09---Coklat-Muda.webp"},{"name":"MORESKIN - Moisturizing Lipstick 10 - Coklat Nude","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---Moisturizing-Lipstick-10---Coklat-Nude.webp"},{"name":"MORESKIN - NATURE","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---NATURE.webp"},{"name":"MORESKIN - NIGHT CREAM","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---NIGHT-CREAM.webp"},{"name":"MORESKIN - PINK","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---PINK.webp"},{"name":"MORESKIN - SALMON SERUM","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---SALMON-SERUM.webp"},{"name":"MORESKIN - SERUM GLOW","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---SERUM-GLOW.webp"},{"name":"MORESKIN - SERUM MEN","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---SERUM-MEN.webp"},{"name":"MORESKIN - SERUM VITAMIN C 30_","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---SERUM-VITAMIN-C-30_.webp"},{"name":"MORESKIN - SERUM WHITENING GOLD","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---SERUM-WHITENING-GOLD.webp"},{"name":"MORESKIN - SOFT AND WHITE","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---SOFT-AND-WHITE.webp"},{"name":"MORESKIN - STOMATCH CREAM","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---STOMATCH-CREAM.webp"},{"name":"MORESKIN - SUNBLOCK SPF 50+","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---SUNBLOCK-SPF-50.webp"},{"name":"MORESKIN - Two Wae Cake - Bright","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---Two-Wae-Cake---Bright.webp"},{"name":"MORESKIN - Two Wae Cake - Natural","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---Two-Wae-Cake---Natural.webp"},{"name":"MORESKIN - UNDERARM","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---UNDERARM.webp"},{"name":"MORESKIN - VIAL EAU DE PARFUM - ROYAL BLACK FOR MEN","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---VIAL-EAU-DE-PARFUM---ROYAL-BLACK-FOR-MEN.webp"},{"name":"MORESKIN - VIAL EAU DE PARFUM - ROYAL BLEU DE","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---VIAL-EAU-DE-PARFUM---ROYAL-BLEU-DE.webp"},{"name":"MORESKIN - VIAL EAU DE PARFUM - ROYAL CHERRY AIR","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---VIAL-EAU-DE-PARFUM---ROYAL-CHERRY-AIR.webp"},{"name":"MORESKIN - VIAL EAU DE PARFUM - ROYAL FEMME","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---VIAL-EAU-DE-PARFUM---ROYAL-FEMME.webp"},{"name":"MORESKIN - VIAL EAU DE PARFUM - ROYAL PARIS","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---VIAL-EAU-DE-PARFUM---ROYAL-PARIS.webp"},{"name":"MORESKIN - WHITENING ESSENCE","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---WHITENING-ESSENCE.webp"},{"name":"MORESKIN - WHITENING TONE UP GLASS SKIN","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__MORESKIN---WHITENING-TONE-UP-GLASS-SKIN.webp"},{"name":"OR_LYN - Aromateraphy Shampoo","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__OR_LYN---Aromateraphy-Shampoo.webp"},{"name":"ORYSOAP - RAINBOW SOAP","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__ORYSOAP---RAINBOW-SOAP.webp"},{"name":"ORYSOAP - SERAI SOAP","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__ORYSOAP---SERAI-SOAP.webp"},{"name":"ORYSOAP - TRACE MINERAL SOAP","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__ORYSOAP---TRACE-MINERAL-SOAP.webp"},{"name":"SHANAS - HAIR COLORING SHAMPOO BLUE BLACK","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__SHANAS---HAIR-COLORING-SHAMPOO-BLUE-BLACK.webp"},{"name":"SHANAS - HAIR COLORING SHAMPOO BROWN","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__SHANAS---HAIR-COLORING-SHAMPOO-BROWN.webp"},{"name":"SHANAS - HAIR COLORING SHAMPOO DARK BROWN","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__SHANAS---HAIR-COLORING-SHAMPOO-DARK-BROWN.webp"},{"name":"SHANAS - HAIR COLORING SHAMPOO NATURAL BLACK","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__SHANAS---HAIR-COLORING-SHAMPOO-NATURAL-BLACK.webp"},{"name":"SHANAS - HAIR SERUM ANTI UBAN","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__SHANAS---HAIR-SERUM-ANTI-UBAN.webp"},{"name":"SHANAS - SHAMPOO","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__SHANAS---SHAMPOO.webp"},{"name":"TRIPLE SIX - HAIR TONIC GINSENG PLUS VIT B5","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__TRIPLE-SIX---HAIR-TONIC-GINSENG-PLUS-VIT-B5.webp"},{"name":"TRIPLE SIX - Nutritive Hair Serum","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__TRIPLE-SIX---Nutritive-Hair-Serum.webp"},{"name":"V-SPOT Gel","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__V-SPOT-Gel.webp"},{"name":"ZAIMINA - MILK BEAUTY SOAP","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__ZAIMINA---MILK-BEAUTY-SOAP.webp"},{"name":"ZAIMINA - SABUN LULUR ZAITUN + MADU","category":"PRODUK KOSMETIK","path":"assets/products/produk-kosmetik__ZAIMINA---SABUN-LULUR-ZAITUN-MADU.webp"}];
-(function(){
-  function norm(s){
-    return String(s||'').toLowerCase()
-      .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
-      .replace(/[^a-z0-9]+/g,' ').trim();
+/* =========================================================
+   SAMASTRIA - PRODUCT IMAGE AUTO FINDER
+   Struktur GitHub:
+   foto produk berada langsung di ROOT repository
+   ========================================================= */
+
+(function () {
+  "use strict";
+
+  function normalize(text) {
+    return String(text || "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, " ")
+      .trim();
   }
-  const items=window.SAMASTRIA_PRODUCT_IMAGES||[];
-  const exact=new Map(items.map(x=>[norm(x.name),x.path]));
-  window.SAMASTRIA_FIND_PRODUCT_IMAGE=function(name){
-    const n=norm(name);
-    if(!n) return '';
-    if(exact.has(n)) return exact.get(n);
-    const tokens=n.split(' ').filter(x=>x.length>=3);
-    let best=null,bestScore=0;
-    for(const x of items){
-      const t=norm(x.name).split(' ').filter(y=>y.length>=3);
-      const set=new Set(t);
-      const overlap=tokens.reduce((s,v)=>s+(set.has(v)?1:0),0);
-      const score=overlap/Math.max(1,Math.min(tokens.length,t.length));
-      if(overlap>=2 && score>bestScore){bestScore=score;best=x.path;}
+
+  function cleanProductName(text) {
+    return normalize(text)
+      .replace(/\b\d+(?:[.,]\d+)?\s*(?:cc|ml|gram|gr|kg|liter|l|g)\b/g, " ")
+      .replace(/\b\d+(?:[.,]\d+)?\b/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  /*
+   * Semua foto produk berada langsung di ROOT GitHub.
+   *
+   * Karena GitHub Pages tidak menyediakan daftar isi folder
+   * kepada JavaScript, kita menggunakan nama produk untuk
+   * membentuk nama file gambar.
+   */
+
+  function makeCandidates(productName) {
+    var original = String(productName || "").trim();
+    var normalized = cleanProductName(original);
+
+    if (!original) return [];
+
+    var candidates = [];
+
+    function add(value) {
+      if (!value) return;
+
+      value = value
+        .replace(/[\/\\:*?"<>|]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+
+      if (!value) return;
+
+      var filename =
+        value
+          .replace(/\s+/g, "-")
+          .replace(/-+/g, "-");
+
+      candidates.push(filename + ".webp");
     }
-    return best||'';
+
+    /*
+     * Pola nama file yang Anda upload:
+     *
+     * produk-agrokompleks__NAMA-PRODUK.webp
+     * produk-kesehatan__NAMA-PRODUK.webp
+     * produk-kosmetik__NAMA-PRODUK.webp
+     * produk-perawatan-rumah__NAMA-PRODUK.webp
+     * produk-inovasi-teknologi__NAMA-PRODUK.webp
+     */
+
+    var categories = [
+      "produk-agrokompleks__",
+      "produk-perawatan-rumah__",
+      "produk-kesehatan__",
+      "produk-kosmetik__",
+      "produk-inovasi-teknologi__"
+    ];
+
+    /*
+     * Kandidat berdasarkan nama asli.
+     */
+    var raw = original
+      .replace(/[\/\\:*?"<>|]/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+
+    var rawDash = raw.replace(/\s+/g, "-");
+
+    categories.forEach(function (prefix) {
+      candidates.push(prefix + rawDash + ".webp");
+    });
+
+    /*
+     * Kandidat berdasarkan nama yang sudah dinormalisasi.
+     */
+    if (normalized) {
+      var normDash = normalized.replace(/\s+/g, "-");
+
+      categories.forEach(function (prefix) {
+        candidates.push(prefix + normDash + ".webp");
+      });
+    }
+
+    /*
+     * Kandidat tanpa ukuran.
+     *
+     * Contoh:
+     * POCNASA 500 cc
+     *
+     * dicoba juga:
+     * POCNASA
+     */
+    if (normalized) {
+      var withoutSize = normalized
+        .replace(
+          /\b\d+(?:[.,]\d+)?\s*(cc|ml|gram|gr|kg|liter|l|g)\b/g,
+          " "
+        )
+        .replace(/\s+/g, " ")
+        .trim();
+
+      if (withoutSize) {
+        var noSizeDash = withoutSize.replace(/\s+/g, "-");
+
+        categories.forEach(function (prefix) {
+          candidates.push(prefix + noSizeDash + ".webp");
+        });
+      }
+    }
+
+    /*
+     * Hilangkan duplikat.
+     */
+    return Array.from(new Set(candidates));
+  }
+
+  function imageExists(url) {
+    return new Promise(function (resolve) {
+      var img = new Image();
+
+      img.onload = function () {
+        resolve(true);
+      };
+
+      img.onerror = function () {
+        resolve(false);
+      };
+
+      img.src = url;
+    });
+  }
+
+  /*
+   * Fungsi utama yang dipanggil index.html/admin.html
+   */
+  window.SAMASTRIA_FIND_PRODUCT_IMAGE = function (productName) {
+    var candidates = makeCandidates(productName);
+
+    if (!candidates.length) {
+      return "";
+    }
+
+    /*
+     * Karena fungsi dipanggil saat kartu produk dibuat,
+     * kita kembalikan kandidat pertama yang paling sesuai.
+     *
+     * Nama file yang Anda upload mengikuti nama produk,
+     * sehingga kandidat pertama biasanya sudah tepat.
+     */
+    return candidates[0];
   };
+
+  /*
+   * Versi asynchronous untuk pemeriksaan gambar.
+   * Bisa digunakan jika nanti diperlukan pencarian yang lebih
+   * fleksibel tanpa mengubah fungsi utama.
+   */
+  window.SAMASTRIA_FIND_PRODUCT_IMAGE_ASYNC = async function (
+    productName
+  ) {
+    var candidates = makeCandidates(productName);
+
+    for (var i = 0; i < candidates.length; i++) {
+      var filename = candidates[i];
+
+      var exists = await imageExists(
+        filename
+      );
+
+      if (exists) {
+        return filename;
+      }
+    }
+
+    return "";
+  };
+
 })();
