@@ -1,356 +1,360 @@
 /* ============================================================
    SAMASTRIA - PAKET PRODUK
-   Sumber data: Rekap_Kalkulasi_Paket_NASA
-   6 Paket Produk + Harga JAWA / WIL 1 / WIL 2 / WIL 3 / WIL 4
+   ============================================================
 
-   File:
-   assets/packages.js
+   SUMBER DATA:
+   Rekap_Kalkulasi_Paket_NASA(1).xlsx
 
-   File ini tidak mengubah:
+   DATA DI DALAM FILE INI:
+   - Nama paket
+   - Isi paket
+   - Total eceran resmi
+   - Harga paket promo
+   - Modal agen
+   - Biaya pengaman / packing
+   - Margin bersih
+   - Wilayah JAWA
+   - WIL 1
+   - WIL 2
+   - WIL 3
+   - WIL 4
+
+   Tidak mengubah:
    - Login
    - Supabase
    - Produk utama
    - iPaymu
-   - Keranjang produk utama
+   - Admin
    ============================================================ */
 
 (function () {
   "use strict";
 
+
+  /* ==========================================================
+     DATA PAKET
+     ========================================================== */
+
   const DATA = [
 
-    /* ========================================================
-       1. PAKET BOOSTER BUAH
-       ======================================================== */
     {
       id: "paket-booster-buah",
+
       nama: "Paket Booster Buah",
 
       isi:
-        "POCNASA 500 cc + PPTHORMONIK 100 cc + PWR NUTRITION 250 gram + SPRNASA 250 gram (Berat: ±1.2 kg → Input 1 kg)",
-
-      imageSearch: "POCNASA 500 cc",
+        "POCNASA 500 cc + PPTHORMONIK 100 cc + PWR NUTRITION 250 gram + SPRNASA 250 gram (Berat: ±1.2 kg -> Input 1 kg)",
 
       harga: [
         {
           wilayah: "JAWA",
-          eceran: 255000,
-          harga: 240000,
-          modal: 200000,
-          pengaman: 17000,
-          margin: 23000
+          totalEceranResmi: 255000,
+          hargaPaketPromo: 240000,
+          modalAgen: 200000,
+          biayaPengaman: 17000,
+          marginBersih: 23000
         },
         {
           wilayah: "WIL 1",
-          eceran: 275500,
-          harga: 260000,
-          modal: 216000,
-          pengaman: 17000,
-          margin: 27000
+          totalEceranResmi: 275500,
+          hargaPaketPromo: 260000,
+          modalAgen: 216000,
+          biayaPengaman: 17000,
+          marginBersih: 27000
         },
         {
           wilayah: "WIL 2",
-          eceran: 287500,
-          harga: 272000,
-          modal: 226000,
-          pengaman: 17000,
-          margin: 29000
+          totalEceranResmi: 287500,
+          hargaPaketPromo: 272000,
+          modalAgen: 226000,
+          biayaPengaman: 17000,
+          marginBersih: 29000
         },
         {
           wilayah: "WIL 3",
-          eceran: 301500,
-          harga: 286000,
-          modal: 236000,
-          pengaman: 17000,
-          margin: 33000
+          totalEceranResmi: 301500,
+          hargaPaketPromo: 286000,
+          modalAgen: 236000,
+          biayaPengaman: 17000,
+          marginBersih: 33000
         },
         {
           wilayah: "WIL 4",
-          eceran: 331000,
-          harga: 316000,
-          modal: 258000,
-          pengaman: 17000,
-          margin: 41000
+          totalEceranResmi: 331000,
+          hargaPaketPromo: 316000,
+          modalAgen: 258000,
+          biayaPengaman: 17000,
+          marginBersih: 41000
         }
       ]
     },
 
-    /* ========================================================
-       2. PAKET TERNAK & PERIKAN
-       ======================================================== */
+
     {
       id: "paket-ternak-perikan",
+
       nama: "Paket Ternak & Perikan",
 
       isi:
-        "VITERNA 500 cc + POCNASA 500 cc (Berat: ±1.1 kg → Input 1 kg)",
-
-      imageSearch: "VITERNA 500 cc",
+        "VITERNA 500 cc + POCNASA 500 cc (Berat: ±1.1 kg -> Input 1 kg)",
 
       harga: [
         {
           wilayah: "JAWA",
-          eceran: 120000,
-          harga: 112000,
-          modal: 90000,
-          pengaman: 17000,
-          margin: 5000
+          totalEceranResmi: 120000,
+          hargaPaketPromo: 112000,
+          modalAgen: 90000,
+          biayaPengaman: 17000,
+          marginBersih: 5000
         },
         {
           wilayah: "WIL 1",
-          eceran: 135000,
-          harga: 126000,
-          modal: 101000,
-          pengaman: 17000,
-          margin: 8000
+          totalEceranResmi: 135000,
+          hargaPaketPromo: 126000,
+          modalAgen: 101000,
+          biayaPengaman: 17000,
+          marginBersih: 8000
         },
         {
           wilayah: "WIL 2",
-          eceran: 143000,
-          harga: 134000,
-          modal: 107000,
-          pengaman: 17000,
-          margin: 10000
+          totalEceranResmi: 143000,
+          hargaPaketPromo: 134000,
+          modalAgen: 107000,
+          biayaPengaman: 17000,
+          marginBersih: 10000
         },
         {
           wilayah: "WIL 3",
-          eceran: 150000,
-          harga: 141000,
-          modal: 113000,
-          pengaman: 17000,
-          margin: 11000
+          totalEceranResmi: 150000,
+          hargaPaketPromo: 141000,
+          modalAgen: 113000,
+          biayaPengaman: 17000,
+          marginBersih: 11000
         },
         {
           wilayah: "WIL 4",
-          eceran: 170000,
-          harga: 161000,
-          modal: 128000,
-          pengaman: 17000,
-          margin: 16000
+          totalEceranResmi: 170000,
+          hargaPaketPromo: 161000,
+          modalAgen: 128000,
+          biayaPengaman: 17000,
+          marginBersih: 16000
         }
       ]
     },
 
-    /* ========================================================
-       3. PAKET SKINCARE GLOW
-       ======================================================== */
+
     {
       id: "paket-skincare-glow",
+
       nama: "Paket Skincare Glow",
 
       isi:
-        "ERHSALI Brightening Soap + MORESKIN Body Wash Glow + MORESKIN Clean & Glow Cream (Berat: ±0.4 kg → Input 1 kg)",
-
-      imageSearch: "ERHSALI Brightening Soap",
+        "ERHSALI Brightening Soap + MORESKIN Body Wash Glow + MORESKIN Clean & Glow Cream (Berat: ±0.4 kg -> Input 1 kg)",
 
       harga: [
         {
           wilayah: "JAWA",
-          eceran: 270000,
-          harga: 255000,
-          modal: 213000,
-          pengaman: 17000,
-          margin: 25000
+          totalEceranResmi: 270000,
+          hargaPaketPromo: 255000,
+          modalAgen: 213000,
+          biayaPengaman: 17000,
+          marginBersih: 25000
         },
         {
           wilayah: "WIL 1",
-          eceran: 289000,
-          harga: 274000,
-          modal: 228000,
-          pengaman: 17000,
-          margin: 29000
+          totalEceranResmi: 289000,
+          hargaPaketPromo: 274000,
+          modalAgen: 228000,
+          biayaPengaman: 17000,
+          marginBersih: 29000
         },
         {
           wilayah: "WIL 2",
-          eceran: 308000,
-          harga: 293000,
-          modal: 244000,
-          pengaman: 17000,
-          margin: 32000
+          totalEceranResmi: 308000,
+          hargaPaketPromo: 293000,
+          modalAgen: 244000,
+          biayaPengaman: 17000,
+          marginBersih: 32000
         },
         {
           wilayah: "WIL 3",
-          eceran: 328000,
-          harga: 313000,
-          modal: 261000,
-          pengaman: 17000,
-          margin: 35000
+          totalEceranResmi: 328000,
+          hargaPaketPromo: 313000,
+          modalAgen: 261000,
+          biayaPengaman: 17000,
+          marginBersih: 35000
         },
         {
           wilayah: "WIL 4",
-          eceran: 365000,
-          harga: 350000,
-          modal: 293000,
-          pengaman: 17000,
-          margin: 40000
+          totalEceranResmi: 365000,
+          hargaPaketPromo: 350000,
+          modalAgen: 293000,
+          biayaPengaman: 17000,
+          marginBersih: 40000
         }
       ]
     },
 
-    /* ========================================================
-       4. PAKET ASAM URAT & KOLE
-       ======================================================== */
+
     {
       id: "paket-asam-urat-kole",
+
       nama: "Paket Asam Urat & Kole",
 
       isi:
-        "HERBAGYN 50 Kapsul + HERBATHUS 50 Kapsul (Berat: <0.5 kg → Input 1 kg)",
-
-      imageSearch: "HERBAGYN 50 Kapsul",
+        "HERBAGYN 50 Kapsul + HERBATHUS 50 Kapsul (Berat: <0.5 kg -> Input 1 kg)",
 
       harga: [
         {
           wilayah: "JAWA",
-          eceran: 330000,
-          harga: 310000,
-          modal: 230000,
-          pengaman: 17000,
-          margin: 63000
+          totalEceranResmi: 330000,
+          hargaPaketPromo: 310000,
+          modalAgen: 230000,
+          biayaPengaman: 17000,
+          marginBersih: 63000
         },
         {
           wilayah: "WIL 1",
-          eceran: 344000,
-          harga: 324000,
-          modal: 240000,
-          pengaman: 17000,
-          margin: 67000
+          totalEceranResmi: 344000,
+          hargaPaketPromo: 324000,
+          modalAgen: 240000,
+          biayaPengaman: 17000,
+          marginBersih: 67000
         },
         {
           wilayah: "WIL 2",
-          eceran: 358000,
-          harga: 338000,
-          modal: 252000,
-          pengaman: 17000,
-          margin: 69000
+          totalEceranResmi: 358000,
+          hargaPaketPromo: 338000,
+          modalAgen: 252000,
+          biayaPengaman: 17000,
+          marginBersih: 69000
         },
         {
           wilayah: "WIL 3",
-          eceran: 374000,
-          harga: 354000,
-          modal: 264000,
-          pengaman: 17000,
-          margin: 73000
+          totalEceranResmi: 374000,
+          hargaPaketPromo: 354000,
+          modalAgen: 264000,
+          biayaPengaman: 17000,
+          marginBersih: 73000
         },
         {
           wilayah: "WIL 4",
-          eceran: 400000,
-          harga: 380000,
-          modal: 288000,
-          pengaman: 17000,
-          margin: 75000
+          totalEceranResmi: 400000,
+          hargaPaketPromo: 380000,
+          modalAgen: 288000,
+          biayaPengaman: 17000,
+          marginBersih: 75000
         }
       ]
     },
 
-    /* ========================================================
-       5. PAKET ANTI UBAN & RAMB
-       ======================================================== */
+
     {
       id: "paket-anti-uban-ramb",
+
       nama: "Paket Anti Uban & Ramb",
 
       isi:
-        "SHANAS Shampoo 3 in 1 170 ml + SHANAS Anti Uban 120 ml (Berat: <0.5 kg → Input 1 kg)",
-
-      imageSearch: "SHANAS Shampoo 3 in 1 170 ml",
+        "SHANAS Shampoo 3 in 1 170 ml + SHANAS Anti Uban 120 ml (Berat: <0.5 kg -> Input 1 kg)",
 
       harga: [
         {
           wilayah: "JAWA",
-          eceran: 108000,
-          harga: 100000,
-          modal: 88000,
-          pengaman: 2000,
-          margin: 10000
+          totalEceranResmi: 108000,
+          hargaPaketPromo: 100000,
+          modalAgen: 88000,
+          biayaPacking: 2000,
+          subsidiOngkir: 0,
+          marginBersih: 10000
         },
         {
           wilayah: "WIL 1",
-          eceran: 124000,
-          harga: 115000,
-          modal: 101000,
-          pengaman: 2000,
-          margin: 12000
+          totalEceranResmi: 124000,
+          hargaPaketPromo: 115000,
+          modalAgen: 101000,
+          biayaPacking: 2000,
+          subsidiOngkir: 0,
+          marginBersih: 12000
         },
         {
           wilayah: "WIL 2",
-          eceran: 137000,
-          harga: 128000,
-          modal: 112000,
-          pengaman: 2000,
-          margin: 14000
+          totalEceranResmi: 137000,
+          hargaPaketPromo: 128000,
+          modalAgen: 112000,
+          biayaPacking: 2000,
+          subsidiOngkir: 0,
+          marginBersih: 14000
         },
         {
           wilayah: "WIL 3",
-          eceran: 150000,
-          harga: 140000,
-          modal: 123000,
-          pengaman: 2000,
-          margin: 15000
+          totalEceranResmi: 150000,
+          hargaPaketPromo: 140000,
+          modalAgen: 123000,
+          biayaPacking: 2000,
+          subsidiOngkir: 0,
+          marginBersih: 15000
         },
         {
           wilayah: "WIL 4",
-          eceran: 180000,
-          harga: 170000,
-          modal: 147000,
-          pengaman: 2000,
-          margin: 21000
+          totalEceranResmi: 180000,
+          hargaPaketPromo: 170000,
+          modalAgen: 147000,
+          biayaPacking: 2000,
+          subsidiOngkir: 0,
+          marginBersih: 21000
         }
       ]
     },
 
-    /* ========================================================
-       6. PAKET SENYUM SEHAT
-       ======================================================== */
+
     {
       id: "paket-senyum-sehat",
+
       nama: "Paket Senyum Sehat",
 
       isi:
-        "2 pcs Pasta Gigi NASA 120g + 1 pcs GRECE Anti Perspirant 50g (Berat: <0.5 kg → Input 1 kg)",
-
-      imageSearch: "Pasta Gigi NASA 120g",
+        "2 pcs Pasta Gigi NASA 120g + 1 pcs GRECE Anti Perspirant 50g (Berat: <0.5 kg -> Input 1 kg)",
 
       harga: [
         {
           wilayah: "JAWA",
-          eceran: 95000,
-          harga: 95000,
-          modal: 72000,
-          pengaman: 2000,
-          margin: 21000
+          totalEceranResmi: 95000,
+          hargaPaketPromo: 95000,
+          modalAgen: 72000,
+          biayaPengaman: 2000,
+          marginBersih: 21000
         },
         {
           wilayah: "WIL 1",
-          eceran: 108000,
-          harga: 108000,
-          modal: 83000,
-          pengaman: 2000,
-          margin: 23000
+          totalEceranResmi: 108000,
+          hargaPaketPromo: 108000,
+          modalAgen: 83000,
+          biayaPengaman: 2000,
+          marginBersih: 23000
         },
         {
           wilayah: "WIL 2",
-          eceran: 120000,
-          harga: 120000,
-          modal: 93000,
-          pengaman: 2000,
-          margin: 25000
+          totalEceranResmi: 120000,
+          hargaPaketPromo: 120000,
+          modalAgen: 93000,
+          biayaPengaman: 2000,
+          marginBersih: 25000
         },
         {
           wilayah: "WIL 3",
-          eceran: 132000,
-          harga: 132000,
-          modal: 102000,
-          pengaman: 2000,
-          margin: 28000
+          totalEceranResmi: 132000,
+          hargaPaketPromo: 132000,
+          modalAgen: 102000,
+          biayaPengaman: 2000,
+          marginBersih: 28000
         },
         {
           wilayah: "WIL 4",
-          eceran: 153000,
-          harga: 153000,
-          modal: 122000,
-          pengaman: 2000,
-          margin: 29000
+          totalEceranResmi: 153000,
+          hargaPaketPromo: 153000,
+          modalAgen: 122000,
+          biayaPengaman: 2000,
+          marginBersih: 29000
         }
       ]
     }
@@ -358,128 +362,161 @@
   ];
 
 
-  /* ============================================================
-     SIMPAN DATA PAKET KE WINDOW
-     ============================================================ */
+  /* ==========================================================
+     SIMPAN DATA KE WINDOW
+     ========================================================== */
 
   window.SAMASTRIA_PACKAGE_DATA = DATA;
 
 
-  /* ============================================================
+  /* ==========================================================
      FORMAT RUPIAH
-     ============================================================ */
+     ========================================================== */
 
-  function rupiah(n) {
-    return "Rp " + Number(n || 0).toLocaleString("id-ID");
+  function rupiah(value) {
+    return "Rp " + Number(value || 0).toLocaleString("id-ID");
   }
 
 
-  /* ============================================================
+  /* ==========================================================
      ESCAPE HTML
-     ============================================================ */
+     ========================================================== */
 
-  function esc(v) {
-    return String(v ?? "").replace(/[&<>'"]/g, function (c) {
+  function esc(value) {
+    return String(value ?? "").replace(/[&<>'"]/g, function (char) {
       return {
         "&": "&amp;",
         "<": "&lt;",
         ">": "&gt;",
         "'": "&#39;",
         '"': "&quot;"
-      }[c];
+      }[char];
     });
   }
 
 
-  /* ============================================================
-     CARI GAMBAR PAKET
-     Menggunakan sistem gambar produk yang sudah ada.
-     ============================================================ */
+  /* ==========================================================
+     CARI GAMBAR
+     
+     Tidak menambahkan nama gambar baru.
+     Sistem menggunakan nama produk pertama dari isi paket
+     dan fungsi pencarian gambar yang sudah ada.
+     ========================================================== */
 
   function packageImage(pkg) {
+
     try {
-      if (window.SAMASTRIA_FIND_PRODUCT_IMAGE) {
+
+      if (
+        window.SAMASTRIA_FIND_PRODUCT_IMAGE &&
+        pkg &&
+        pkg.isi
+      ) {
+
+        const firstProduct =
+          pkg.isi
+            .split("+")[0]
+            .replace(/\(.*$/, "")
+            .trim();
+
         return (
-          window.SAMASTRIA_FIND_PRODUCT_IMAGE(pkg.imageSearch) || ""
+          window.SAMASTRIA_FIND_PRODUCT_IMAGE(
+            firstProduct
+          ) || ""
         );
       }
-    } catch (e) {
-      console.warn("Gagal mencari gambar paket:", pkg.nama, e);
+
+    } catch (error) {
+
+      console.warn(
+        "Gagal mencari gambar paket:",
+        pkg?.nama,
+        error
+      );
+
     }
 
     return "";
   }
 
 
-  /* ============================================================
-     CEK WILAYAH PELANGGAN
-     ============================================================ */
+  /* ==========================================================
+     HARGA SESUAI WILAYAH
+     ========================================================== */
 
   function currentPrice(pkg) {
+
     const region = window.priceRegion;
 
     if (!region) {
       return null;
     }
 
-    const row = pkg.harga.find(function (x) {
-      return x.wilayah === region;
+    const row = pkg.harga.find(function (item) {
+      return item.wilayah === region;
     });
 
-    return row ? row.harga : null;
+    return row
+      ? row.hargaPaketPromo
+      : null;
   }
 
 
-  /* ============================================================
-     TAMPILKAN SEMUA HARGA WILAYAH
-     ============================================================ */
+  /* ==========================================================
+     DAFTAR HARGA SEMUA WILAYAH
+     ========================================================== */
 
   function priceLines(pkg) {
-    return pkg.harga
-      .map(function (x) {
-        return (
-          '<div style="' +
-          "display:flex;" +
-          "justify-content:space-between;" +
-          "gap:10px;" +
-          "padding:4px 0;" +
-          'border-bottom:1px solid #eee;">' +
 
-          "<span>" +
-          esc(x.wilayah) +
-          "</span>" +
+    return pkg.harga.map(function (item) {
 
-          "<strong>" +
-          rupiah(x.harga) +
-          "</strong>" +
+      return (
+        '<div style="' +
+        "display:flex;" +
+        "justify-content:space-between;" +
+        "gap:10px;" +
+        "padding:4px 0;" +
+        'border-bottom:1px solid #eee;">' +
 
-          "</div>"
-        );
-      })
-      .join("");
+        "<span>" +
+        esc(item.wilayah) +
+        "</span>" +
+
+        "<strong>" +
+        rupiah(item.hargaPaketPromo) +
+        "</strong>" +
+
+        "</div>"
+      );
+
+    }).join("");
   }
 
 
-  /* ============================================================
+  /* ==========================================================
      RENDER PAKET PRODUK
-     ============================================================ */
+     ========================================================== */
 
   window.SAMASTRIA_RENDER_PACKAGES = function () {
 
-    const grid = document.getElementById("productGrid");
+    const grid =
+      document.getElementById("productGrid");
 
     if (!grid) {
+
       console.warn(
-        "SAMASTRIA: #productGrid tidak ditemukan."
+        "SAMASTRIA: productGrid tidak ditemukan."
       );
+
       return;
     }
 
-    const noMsg =
+
+    const noProductMsg =
       document.getElementById("noProductMsg");
 
-    if (noMsg) {
-      noMsg.classList.add("hidden");
+    if (noProductMsg) {
+      noProductMsg.classList.add("hidden");
     }
 
 
@@ -487,35 +524,27 @@
 
       const img = packageImage(pkg);
 
-      const activePrice = currentPrice(pkg);
+      const activePrice =
+        currentPrice(pkg);
 
 
       /* --------------------------------------------------------
          GAMBAR
          -------------------------------------------------------- */
 
-      const imageHtml = img
+      let imageHtml;
 
-        ? (
+      if (img) {
+
+        imageHtml =
           '<img class="product-img" ' +
           'src="' + esc(img) + '" ' +
           'alt="' + esc(pkg.nama) + '" ' +
-          'loading="lazy" ' +
-          'onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';">' +
+          'loading="lazy">';
 
-          '<div class="product-img" ' +
-          'style="' +
-          "display:none;" +
-          "align-items:center;" +
-          "justify-content:center;" +
-          "font-size:42px;" +
-          "background:#f7f2e9;" +
-          '">' +
-          "▣" +
-          "</div>"
-        )
+      } else {
 
-        : (
+        imageHtml =
           '<div class="product-img" ' +
           'style="' +
           "display:flex;" +
@@ -525,15 +554,16 @@
           "background:#f7f2e9;" +
           '">' +
           "▣" +
-          "</div>"
-        );
+          "</div>";
+      }
 
 
       /* --------------------------------------------------------
          HARGA
          -------------------------------------------------------- */
 
-      let priceHtml = "";
+      let priceHtml;
+
 
       if (activePrice !== null) {
 
@@ -545,7 +575,8 @@
           '<div style="' +
           "font-size:.78rem;" +
           "color:var(--text-light);" +
-          'margin-top:4px;">' +
+          "margin-top:4px;" +
+          '">' +
 
           "Harga wilayah " +
           esc(window.priceRegion) +
@@ -558,7 +589,10 @@
           '<div style="' +
           "margin-top:8px;" +
           "font-size:.88rem;" +
-          'background:#fafafa;padding:8px;border-radius:8px;">' +
+          "background:#fafafa;" +
+          "padding:8px;" +
+          "border-radius:8px;" +
+          '">' +
 
           '<div style="' +
           "font-weight:700;" +
@@ -623,6 +657,7 @@
           "</div>" +
 
         "</div>"
+
       );
 
     }).join("");
@@ -633,54 +668,63 @@
       DATA.length +
       " paket produk ditampilkan."
     );
+
   };
 
 
-  /* ============================================================
-     FUNGSI UNTUK MENCARI PAKET
-     ============================================================ */
+  /* ==========================================================
+     CARI PAKET BERDASARKAN ID
+     ========================================================== */
 
   window.SAMASTRIA_GET_PACKAGE = function (id) {
-    return DATA.find(function (pkg) {
-      return pkg.id === id;
-    }) || null;
+
+    return (
+      DATA.find(function (pkg) {
+        return pkg.id === id;
+      }) || null
+    );
+
   };
 
 
-  /* ============================================================
-     FUNGSI UNTUK MENDAPATKAN HARGA PAKET
-     ============================================================ */
+  /* ==========================================================
+     AMBIL HARGA PROMO PAKET
+     ========================================================== */
 
   window.SAMASTRIA_GET_PACKAGE_PRICE = function (
     id,
     wilayah
   ) {
 
-    const pkg = window.SAMASTRIA_GET_PACKAGE(id);
+    const pkg =
+      window.SAMASTRIA_GET_PACKAGE(id);
 
     if (!pkg) {
       return null;
     }
 
-    const row = pkg.harga.find(function (x) {
-      return x.wilayah === wilayah;
-    });
 
-    return row ? row.harga : null;
+    const row =
+      pkg.harga.find(function (item) {
+        return item.wilayah === wilayah;
+      });
+
+
+    return row
+      ? row.hargaPaketPromo
+      : null;
+
   };
 
 
-  /* ============================================================
-     JANGAN LANGSUNG RENDER DI SINI
-     
-     Render akan dipanggil oleh index.html ketika user memilih
-     kategori "Paket Produk".
-     ============================================================ */
+  /* ==========================================================
+     LOG
+     ========================================================== */
 
   console.log(
     "SAMASTRIA packages.js aktif:",
     DATA.length,
-    "paket tersedia."
+    "paket terverifikasi."
   );
 
 })();
