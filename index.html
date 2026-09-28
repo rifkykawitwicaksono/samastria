@@ -1245,6 +1245,7 @@
         <div class="container" style="max-width:860px;">
           <div class="payment-head"><span class="section-kicker">Pembayaran aman</span><h2 class="section-title">Pilih Metode Pembayaran</h2><p>Gunakan QRIS atau Virtual Account iPaymu. Anda akan diarahkan ke halaman pembayaran iPaymu setelah memilih metode.</p></div>
           <div class="payment-info" id="paymentInfo"></div>
+	<div id="samastriaQris" class="hidden"></div>
           <div class="ipaymu-methods" id="ipaymuMethods">
             <button class="pay-method active" data-method="qris" data-channel="mpm" onclick="selectIpaymuMethod(this)"><strong>QRIS</strong><span>Bayar dengan QRIS melalui iPaymu</span></button>
             <button class="pay-method" data-method="va" data-channel="bca" onclick="selectIpaymuMethod(this)"><strong>BCA VA</strong><span>Virtual Account BCA</span></button>
@@ -1474,9 +1475,127 @@
     function renderPayment(o){currentOrder=o;localStorage.setItem(`samastria_current_order_${currentUser.id}`,o.id);document.getElementById('paymentInfo').innerHTML=`<div class="payment-card"><div><span class="payment-label">Pesanan</span><strong>#${escapeHTML(o.id.slice(0,8).toUpperCase())}</strong></div><div><span class="payment-label">Wilayah</span><strong>${escapeHTML(o.price_region||priceRegion||'-')}</strong></div><div class="payment-total"><span>Total Pembayaran</span><strong>${formatRupiah(o.total)}</strong></div></div>`;selectedIpaymuMethod={method:'qris',channel:'mpm'};document.querySelectorAll('.pay-method').forEach((b,i)=>b.classList.toggle('active',i===0));updatePayButton();}
     function selectIpaymuMethod(btn){document.querySelectorAll('.pay-method').forEach(b=>b.classList.remove('active'));btn.classList.add('active');selectedIpaymuMethod={method:btn.dataset.method,channel:btn.dataset.channel};updatePayButton();}
     function updatePayButton(){const b=document.getElementById('payNowBtn');if(!b)return;b.textContent=selectedIpaymuMethod.method==='qris'?'Bayar Sekarang dengan QRIS â†’':`Lanjut ke ${selectedIpaymuMethod.channel.toUpperCase()} Virtual Account â†’`;}
-    async function startIpaymuPayment(){if(!currentOrder)return showToast('Pesanan pembayaran tidak ditemukan.','error');const b=document.getElementById('payNowBtn');b.disabled=true;b.textContent='Menyiapkan pembayaran...';try{const {data,error}=await db.functions.invoke('create-ipaymu-payment',{body:{orderId:currentOrder.id,paymentMethod:selectedIpaymuMethod.method,paymentChannel:selectedIpaymuMethod.channel}});if(error)throw error;const url=data?.url||data?.paymentUrl||data?.payment_url;if(!url)throw new Error(data?.message||'iPaymu tidak mengembalikan URL pembayaran.');window.location.href=url;}catch(e){console.error('iPaymu payment:',e);showToast(e.message||'Gagal membuat pembayaran iPaymu.','error');b.disabled=false;updatePayButton();}}
+
+async function startIpaymuPayment() {
+  if (!currentOrder) {
+    return showToast('Pesanan pembayaran tidak ditemukan.', 'error');
+  }
+
+  const b = document.getElementById('payNowBtn');
+  b.disabled = true;
+  b.textContent = 'Menyiapkan pembayaran...';
+
+  try {
+    const { data, error } = await db.functions.invoke(
+      'create-ipaymu-payment',
+      {
+        body: {
+          orderId: currentOrder.id,
+          paymentMethod: selectedIpaymuMethod.method,
+          paymentChannel: selectedIpaymuMethod.channel
+        }
+      }
+    );
+
+    if (error) throw error;
+
+    const payment = data?.payment;
+
+    if (!data?.ok || !payment) {
+      throw new Error(
+        data?.error || data?.message || 'Data pembayaran tidak lengkap.'
+      );
+    }
+
+    if (
+      payment.paymentMethod === 'qris' &&
+      payment.paymentChannel === 'mpm'
+    ) {
+      if (!payment.qrImage && !payment.qrString) {
+        throw new Error('Data QRIS tidak tersedia. Silakan coba lagi.');
+      }
+
+      showSamastriaQris(payment);
+      return;
+    }
+
+    const url = payment.paymentUrl ||
+      data?.url || data?.paymentUrl || data?.payment_url;
+
+    if (!url) {
+      throw new Error('iPaymu tidak mengembalikan URL pembayaran.');
+    }
+
+    window.location.href = url;
+  } catch (e) {
+    console.error('iPaymu payment:', e);
+    showToast(
+      e.message || 'Gagal membuat pembayaran iPaymu.',
+      'error'
+    );
+    b.disabled = false;
+    updatePayButton();
+  }
+}
     async function refreshIpaymuStatus(orderId=currentOrder?.id){if(!orderId)return showToast('Belum ada pesanan pembayaran.','error');try{const {data,error}=await db.functions.invoke('check-ipaymu-payment',{body:{orderId}});if(error)throw error;const st=data?.status||data?.payment?.status||data?.data?.status;if(st)showToast(`Status pembayaran: ${statusLabel(st)}`);else showToast('Status pembayaran sedang diperiksa.');await loadProducts();renderOrders();}catch(e){showToast(e.message||'Gagal memeriksa status pembayaran.','error');}}
 
+function showSamastriaQris(payment) {
+  const box = document.getElementById('samastriaQris');
+
+  if (!box) {
+    throw new Error('Tempat untuk menampilkan QRIS tidak ditemukan.');
+  }
+
+  const qrUrl = String(payment.qrImage || '');
+
+  if (!/^https:\/\/my\.ipaymu\.com\/qris-basic\//i.test(qrUrl)) {
+    throw new Error('Gambar QRIS dari iPaymu tidak valid.');
+  }
+
+  box.innerHTML = `
+    <div style="
+      max-width: 420px;
+      margin: 24px auto;
+      padding: 22px;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      text-align: center;
+      background: #fff;
+      color: #111827;
+      box-sizing: border-box;
+    ">
+      <h3 style="margin: 0 0 8px;">Scan QRIS untuk Membayar</h3>
+      <p style="margin: 0 0 16px; color: #6b7280;">
+        Buka aplikasi pembayaran Anda, lalu scan kode QR berikut.
+      </p>
+      <img
+        id="samastriaQrisImage"
+        alt="Kode QRIS pembayaran Samastria"
+        style="
+          display: block;
+          width: 100%;
+          max-width: 300px;
+          height: auto;
+          margin: 0 auto 16px;
+        "
+      >
+      <p style="font-size: 13px; color: #6b7280;">
+        Jika pembayaran berhasil, tekan tombol Perbarui Status.
+      </p>
+    </div>
+  `;
+
+  document.getElementById('samastriaQrisImage').src = qrUrl;
+  box.classList.remove('hidden');
+
+  const button = document.getElementById('payNowBtn');
+  if (button) {
+    button.disabled = false;
+    updatePayButton();
+  }
+
+  box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
     function statusLabel(s){return ({pending_payment:'Menunggu Pembayaran',payment_submitted:'Menunggu Verifikasi',processing:'Diproses',shipped:'Dikirim',completed:'Selesai',cancelled:'Dibatalkan',paid:'Sudah Dibayar',expired:'Kedaluwarsa',failed:'Gagal'})[s]||s;}
     async function renderOrders(){const c=document.getElementById('ordersContent');try{const {data:orders,error}=await db.from('orders').select('*, order_items(*)').eq('user_id',currentUser.id).order('created_at',{ascending:false});if(error)throw error;const q=(document.getElementById('orderSearchCustomer')?.value||'').toLowerCase().trim(),st=document.getElementById('orderStatusCustomer')?.value||'';const arr=(orders||[]).filter(o=>(!st||o.status===st)&&(!q||`${o.id} ${(o.order_items||[]).map(i=>i.product_name).join(' ')}`.toLowerCase().includes(q)));const badge=document.getElementById('orderNoticeBadge');const n=(orders||[]).filter(o=>['payment_submitted','processing','shipped'].includes(o.status)).length;if(badge){badge.textContent=n;badge.classList.toggle('hidden',n===0);}if(!arr.length){c.innerHTML='<div class="empty-state"><div class="icon">ðŸ“¦</div><h3>Tidak ada pesanan</h3><p>Belum ada pesanan yang sesuai.</p></div>';return;}c.innerHTML=arr.map(o=>{const items=(o.order_items||[]).map(i=>`${escapeHTML(i.product_name)} Ã— ${i.quantity}`).join(', ');return `<div class="order-card"><div class="order-header"><div><strong>Pesanan #${escapeHTML(o.id.slice(0,8).toUpperCase())}</strong><div style="font-size:.85rem;color:var(--text-light)">${new Date(o.created_at).toLocaleString('id-ID')}</div></div><span class="order-status">${escapeHTML(statusLabel(o.status))}</span></div><div>${items||'-'}</div><div style="font-weight:600;margin-top:6px">Total: ${formatRupiah(o.total)}</div><div style="font-size:.85rem;color:var(--text-light);margin-top:6px">${escapeHTML(o.province||'')} ${escapeHTML(o.city||'')}<br>${escapeHTML(o.address||'')}</div><div class="product-actions" style="margin-top:10px"><button class="btn btn-outline btn-sm" onclick="showOrderDetail('${o.id}')">Detail</button><button class="btn btn-secondary btn-sm" onclick="buyAgain('${o.id}')">Beli Lagi</button>${o.status==='pending_payment'?`<button class="btn btn-danger btn-sm" onclick="cancelOrder('${o.id}')">Batalkan</button>`:''}</div></div>`}).join('');}catch(e){c.innerHTML=`<div class="empty-state"><h3>Gagal memuat pesanan</h3><p>${escapeHTML(e.message||e)}</p></div>`;}}
     async function buyAgain(id){try{const {data:o,error}=await db.from('orders').select('*, order_items(*)').eq('id',id).eq('user_id',currentUser.id).single();if(error)throw error;let added=0;for(const i of (o.order_items||[])){const p=PRODUCTS.find(x=>x.id===Number(i.product_id));if(!p||p.stok<1)continue;const ex=cart.find(x=>x.id===p.id);const q=Math.min(Number(i.quantity)||1,p.stok-(ex?.qty||0));if(q>0){if(ex)ex.qty+=q;else cart.push({id:p.id,nama:p.nama,harga:p.harga,gambar:p.gambar,qty:q});added+=q;}}saveCart();showPage('cart');showToast(`${added} item dimasukkan ke keranjang.`);}catch(e){showToast(e.message||'Gagal membeli lagi.','error');}}
