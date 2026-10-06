@@ -51,4 +51,485 @@ document.getElementById('forgotAdmin').onclick=e=>{e.preventDefault();document.g
 document.getElementById('loginForm').addEventListener('submit',async e=>{e.preventDefault();enableNotificationSound();try{const {error}=await db.auth.signInWithPassword({email:document.getElementById('email').value.trim(),password:document.getElementById('password').value});if(error)throw error;if(!await ensureAdmin()){await db.auth.signOut();throw new Error('Akun bukan admin.')}document.getElementById('login').classList.add('hidden');document.getElementById('dashboard').classList.remove('hidden');await Promise.all([loadProducts(),loadOrders()])}catch(x){loginMsg(x.message||String(x))}});
 db.auth.onAuthStateChange((event)=>{if(event==='PASSWORD_RECOVERY'){document.getElementById('login').classList.remove('hidden');document.getElementById('dashboard').classList.add('hidden');document.getElementById('loginForm').classList.add('hidden');document.getElementById('forgotForm').classList.add('hidden');document.getElementById('resetForm').classList.remove('hidden')}});
 (async()=>{try{if(await ensureAdmin()){document.getElementById('login').classList.add('hidden');document.getElementById('dashboard').classList.remove('hidden');await Promise.all([loadProducts(),loadOrders()]);renderAudit()}}catch(e){console.error(e)}})();
-</script></body></html>
+/* =========================================================
+   SAMASTRIA - NOTIFIKASI PESANAN BARU + BUNYI
+   Tidak mengubah sistem orders / payments / Supabase
+   ========================================================= */
+
+(function(){
+
+  let notificationReady = false;
+  let knownOrderIds = new Set();
+  let notificationAudio = null;
+
+  /* ---------- STYLE NOTIFIKASI ---------- */
+
+  const notificationStyle = document.createElement('style');
+
+  notificationStyle.textContent = `
+    #samastriaOrderNotification{
+      position:fixed;
+      top:20px;
+      right:20px;
+      z-index:999999;
+      width:min(400px,calc(100vw - 30px));
+      background:#fff;
+      border:1px solid #d9e2ec;
+      border-left:5px solid #1a7a4c;
+      border-radius:14px;
+      padding:16px;
+      box-shadow:0 12px 40px rgba(0,0,0,.20);
+      animation:samastriaNotificationIn .35s ease;
+    }
+
+    #samastriaOrderNotification .notif-head{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+    }
+
+    #samastriaOrderNotification .notif-icon{
+      width:44px;
+      height:44px;
+      min-width:44px;
+      border-radius:50%;
+      background:#1a7a4c;
+      color:#fff;
+      display:grid;
+      place-items:center;
+      font-size:22px;
+    }
+
+    #samastriaOrderNotification .notif-content{
+      flex:1;
+      min-width:0;
+    }
+
+    #samastriaOrderNotification .notif-title{
+      font-size:17px;
+      font-weight:750;
+      color:#1a202c;
+    }
+
+    #samastriaOrderNotification .notif-id{
+      color:#718096;
+      font-size:13px;
+      margin-top:3px;
+    }
+
+    #samastriaOrderNotification .notif-customer{
+      font-weight:650;
+      margin-top:6px;
+      word-break:break-word;
+    }
+
+    #samastriaOrderNotification .notif-total{
+      color:#1a7a4c;
+      font-weight:750;
+      margin-top:3px;
+    }
+
+    #samastriaOrderNotification .notif-close{
+      border:0;
+      background:transparent;
+      color:#718096;
+      cursor:pointer;
+      font-size:24px;
+      line-height:1;
+      padding:0 2px;
+    }
+
+    #samastriaOrderNotification .notif-button{
+      width:100%;
+      margin-top:14px;
+      border:0;
+      border-radius:8px;
+      padding:10px 12px;
+      background:#1a7a4c;
+      color:#fff;
+      font-weight:700;
+      cursor:pointer;
+    }
+
+    #samastriaOrderNotification .notif-button:hover{
+      opacity:.9;
+    }
+
+    @keyframes samastriaNotificationIn{
+      from{
+        opacity:0;
+        transform:translateX(40px);
+      }
+      to{
+        opacity:1;
+        transform:translateX(0);
+      }
+    }
+
+    @media(max-width:600px){
+      #samastriaOrderNotification{
+        top:10px;
+        right:10px;
+        width:calc(100vw - 20px);
+      }
+    }
+  `;
+
+  document.head.appendChild(notificationStyle);
+
+
+  /* ---------- BUNYI NOTIFIKASI ---------- */
+
+  function initNotificationAudio(){
+
+    try{
+
+      if(!notificationAudio){
+
+        notificationAudio =
+          new (window.AudioContext || window.webkitAudioContext)();
+
+      }
+
+      if(notificationAudio.state === 'suspended'){
+        notificationAudio.resume();
+      }
+
+    }catch(e){
+      console.warn('Audio browser tidak tersedia:',e);
+    }
+
+  }
+
+
+  function playOrderSound(){
+
+    try{
+
+      initNotificationAudio();
+
+      if(!notificationAudio) return;
+
+      const ctx = notificationAudio;
+      const now = ctx.currentTime;
+
+      const tones = [
+        {frequency:660,delay:0},
+        {frequency:880,delay:.16},
+        {frequency:1046,delay:.32}
+      ];
+
+      tones.forEach(tone=>{
+
+        const oscillator = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(
+          tone.frequency,
+          now + tone.delay
+        );
+
+        gain.gain.setValueAtTime(
+          0.0001,
+          now + tone.delay
+        );
+
+        gain.gain.exponentialRampToValueAtTime(
+          0.28,
+          now + tone.delay + 0.025
+        );
+
+        gain.gain.exponentialRampToValueAtTime(
+          0.0001,
+          now + tone.delay + 0.18
+        );
+
+        oscillator.connect(gain);
+        gain.connect(ctx.destination);
+
+        oscillator.start(now + tone.delay);
+        oscillator.stop(now + tone.delay + 0.2);
+
+      });
+
+    }catch(e){
+
+      console.warn('Gagal memainkan bunyi:',e);
+
+    }
+
+  }
+
+
+  /* ---------- POPUP ---------- */
+
+  function showOrderNotification(order){
+
+    const existing =
+      document.getElementById('samastriaOrderNotification');
+
+    if(existing){
+      existing.remove();
+    }
+
+    const notification =
+      document.createElement('div');
+
+    notification.id =
+      'samastriaOrderNotification';
+
+    const safeId =
+      esc(order.id || '-');
+
+    const safeCustomer =
+      esc(order.customer_name || 'Pelanggan');
+
+    const total =
+      money(order.total || 0);
+
+    notification.innerHTML = `
+      <div class="notif-head">
+
+        <div class="notif-icon">
+          ðŸ””
+        </div>
+
+        <div class="notif-content">
+
+          <div class="notif-title">
+            Pesanan Baru!
+          </div>
+
+          <div class="notif-id">
+            Pesanan #${safeId}
+          </div>
+
+          <div class="notif-customer">
+            ${safeCustomer}
+          </div>
+
+          <div class="notif-total">
+            ${total}
+          </div>
+
+        </div>
+
+        <button
+          type="button"
+          class="notif-close"
+          aria-label="Tutup"
+          onclick="document.getElementById('samastriaOrderNotification')?.remove()"
+        >
+          Ã—
+        </button>
+
+      </div>
+
+      <button
+        type="button"
+        class="notif-button"
+        onclick="
+          document.getElementById('samastriaOrderNotification')?.remove();
+          document.getElementById('orders')?.scrollIntoView({
+            behavior:'smooth',
+            block:'start'
+          });
+        "
+      >
+        Lihat Pesanan
+      </button>
+    `;
+
+    document.body.appendChild(notification);
+
+    playOrderSound();
+
+    setTimeout(()=>{
+
+      if(notification.parentNode){
+        notification.remove();
+      }
+
+    },12000);
+
+  }
+
+
+  /* ---------- CEK PESANAN BARU ---------- */
+
+  async function checkForNewOrders(){
+
+    try{
+
+      if(!window.supabase || typeof db === 'undefined'){
+        return;
+      }
+
+      const {data,error} =
+        await db
+          .from('orders')
+          .select('id,customer_name,total,created_at,status')
+          .order('created_at',{
+            ascending:false
+          })
+          .limit(50);
+
+      if(error){
+
+        console.warn(
+          'Gagal mengecek pesanan baru:',
+          error.message
+        );
+
+        return;
+      }
+
+      const orders =
+        data || [];
+
+      /*
+       * Saat pertama kali halaman dibuka,
+       * pesanan lama tidak dianggap pesanan baru.
+       */
+
+      if(!notificationReady){
+
+        knownOrderIds =
+          new Set(
+            orders.map(order=>String(order.id))
+          );
+
+        notificationReady = true;
+
+        return;
+      }
+
+
+      const newOrders =
+        orders.filter(order =>
+          !knownOrderIds.has(
+            String(order.id)
+          )
+        );
+
+
+      /* Simpan daftar ID terbaru */
+
+      knownOrderIds =
+        new Set(
+          orders.map(order=>String(order.id))
+        );
+
+
+      if(!newOrders.length){
+        return;
+      }
+
+
+      /*
+       * Tampilkan dari pesanan paling lama
+       * ke yang paling baru.
+       */
+
+      newOrders
+        .slice()
+        .reverse()
+        .forEach(order=>{
+
+          showOrderNotification(order);
+
+          audit(
+            `Pesanan baru masuk #${order.id}`
+          );
+
+        });
+
+
+      /*
+       * Refresh daftar pesanan yang sudah ada.
+       */
+
+      if(typeof loadOrders === 'function'){
+
+        await loadOrders();
+
+      }
+
+
+      /*
+       * Update angka Pesanan di dashboard.
+       */
+
+      const statOrders =
+        document.getElementById('statOrders');
+
+      if(statOrders){
+        statOrders.textContent =
+          ORDERS.length;
+      }
+
+    }catch(error){
+
+      console.warn(
+        'Sistem notifikasi pesanan:',
+        error
+      );
+
+    }
+
+  }
+
+
+  /* ---------- IZIN AUDIO BROWSER ---------- */
+
+  document.addEventListener(
+    'click',
+    function(){
+
+      initNotificationAudio();
+
+    },
+    {
+      once:true,
+      passive:true
+    }
+  );
+
+
+  document.addEventListener(
+    'keydown',
+    function(){
+
+      initNotificationAudio();
+
+    },
+    {
+      once:true
+    }
+  );
+
+
+  /*
+   * Tunggu halaman admin selesai login/load.
+   */
+
+  setTimeout(()=>{
+
+    checkForNewOrders();
+
+  },5000);
+
+
+  /*
+   * Cek setiap 10 detik.
+   */
+
+  setInterval(()=>{
+
+    checkForNewOrders();
+
+  },10000);
+
+
+})();</script></body></html>
