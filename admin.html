@@ -596,7 +596,7 @@ if (kaBtn) kaBtn.addEventListener("click", async function () {
         "\nRESPONS LENGKAP:\n" + JSON.stringify(result, null, 2);
       return;
     }
-    out.textContent = "BERHASIL\n" + result.message + "\nHTTP: " + result.httpStatus + "\nRESPONS LENGKAP:\n" + JSON.stringify(result, null, 2);
+    const provinces = result.provinces ?? result.data?.provinces ?? result.data?.data ?? result.data ?? result.result?.provinces; const provinceCount = result.provinceCount ?? result.province_count ?? result.totalProvinces ?? result.total_provinces ?? (Array.isArray(provinces) ? provinces.length : undefined); out.textContent = "BERHASIL\n" + result.message + "\nHTTP: " + result.httpStatus + "\nJumlah provinsi: " + (provinceCount ?? "Belum tersedia pada respons Worker") + "\nRESPONS LENGKAP:\n" + JSON.stringify(result, null, 2);
   } catch (e) {
     out.textContent = "GAGAL\n" + (e.message || "Kesalahan tidak diketahui.");
   } finally {
