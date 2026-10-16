@@ -590,11 +590,13 @@ if (kaBtn) kaBtn.addEventListener("click", async function () {
     });
     const result = await r.json();
     if (!r.ok || !result.ok) {
-      throw new Error(result.message || "Pengujian gagal: HTTP " + r.status);
+      out.textContent = "PENGUJIAN GAGAL" +
+        "\nHTTP: " + r.status +
+        "\nPesan: " + (result.message || "Tidak ada pesan") +
+        "\nRESPONS LENGKAP:\n" + JSON.stringify(result, null, 2);
+      return;
     }
-    out.textContent = "BERHASIL\n" + result.message +
-      "\nHTTP: " + result.httpStatus +
-      "\nJumlah provinsi: " + result.provinceCount;
+    out.textContent = "BERHASIL\n" + result.message + "\nHTTP: " + result.httpStatus + "\nRESPONS LENGKAP:\n" + JSON.stringify(result, null, 2);
   } catch (e) {
     out.textContent = "GAGAL\n" + (e.message || "Kesalahan tidak diketahui.");
   } finally {
