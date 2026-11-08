@@ -18,6 +18,8 @@ import android.graphics.Typeface;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -46,6 +48,7 @@ public class MainActivity extends Activity {
     private final Handler handler = new Handler();
     private BroadcastReceiver downloadReceiver;
     private boolean updateCheckStarted = false;
+    private float touchStartY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +93,18 @@ public class MainActivity extends Activity {
                 return true;
             }
         });
+        webView.setOnTouchListener((view, event) -> {
+            if (event.getAction() == android.view.MotionEvent.ACTION_DOWN) {
+                touchStartY = event.getY();
+            } else if (event.getAction() == android.view.MotionEvent.ACTION_UP
+                && webView.getScrollY() == 0
+                && event.getY() - touchStartY > 120) {
+                webView.reload();
+                return true;
+            }
+            return false;
+        });
+
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
@@ -259,6 +274,34 @@ public class MainActivity extends Activity {
     @Override protected void onResume() {
         super.onResume();
         if (downloadReceiver != null) installDownloadedApk();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add("Bagikan Samastria");
+        menu.add("Versi aplikasi");
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if ("Bagikan Samastria".contentEquals(item.getTitle())) {
+            Intent share = new Intent(Intent.ACTION_SEND);
+            share.setType("text/plain");
+            share.putExtra(Intent.EXTRA_TEXT, "Belanja di Samastria: https://samastria.my.id/");
+            startActivity(Intent.createChooser(share, "Bagikan"));
+            return true;
+        }
+        if ("Versi aplikasi".contentEquals(item.getTitle())) {
+            String version = "1.0";
+            try {
+                PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
+                version = info.versionName;
+            } catch (Exception ignored) {}
+            Toast.makeText(this, "Samastria versi " + version, Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void handleBackAction() {
