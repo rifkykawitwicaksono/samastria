@@ -71,7 +71,7 @@ public class MainActivity extends Activity {
         FrameLayout splash = new FrameLayout(this);
         splash.setBackgroundColor(Color.rgb(20, 115, 75));
         TextView splashText = new TextView(this);
-        splashText.setText("SAMASTRIA\\n\\nBelanja mudah, nyaman, dan terpercaya");
+        splashText.setText("SAMASTRIA\n\nBelanja mudah, nyaman, dan terpercaya");
         splashText.setTextColor(Color.WHITE);
         splashText.setTextSize(22);
         splashText.setGravity(Gravity.CENTER);
@@ -191,7 +191,7 @@ public class MainActivity extends Activity {
         if (isFinishing() || isDestroyed()) return;
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
             .setTitle("Pembaruan Samastria tersedia")
-            .setMessage("Versi terbaru: " + version + "\\n\\n" + notes)
+            .setMessage("Versi terbaru: " + version + "\n\n" + notes)
             .setPositiveButton("Update Sekarang", (dialog, which) -> startApkDownload(apkUrl));
         if (!mandatory) builder.setNegativeButton("Nanti", (dialog, which) -> dialog.dismiss());
         AlertDialog dialog = builder.create();
