@@ -1,0 +1,32 @@
+# Environment files and local secrets
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Private keys, certificates, and signing files
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+
+# Local credentials and tool state
+secrets/
+.supabase/
+supabase/.temp/
+local.properties
+
+# Dependencies and generated build output
+node_modules/
+.gradle/
+**/build/
+*.apk
+*.aab
+
+# Operating system files
+.DS_Store
+Thumbs.db
